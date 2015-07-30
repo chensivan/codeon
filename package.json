@@ -15,6 +15,7 @@
     "dependencies": {
         "recordrtc": "latest",
         "mkdirp": "latest",
-        "lame": "latest"
+        "atom-helpers": "latest",
+        "jquery": "latest"
     }
 }
