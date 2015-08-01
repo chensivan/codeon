@@ -17,6 +17,7 @@
         "mkdirp": "latest",
         "atom-helpers": "latest",
         "jquery": "latest",
-        "diff": "latest"
+        "diff": "latest",
+        "archiver": "latest"
     }
 }
