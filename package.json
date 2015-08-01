@@ -16,6 +16,7 @@
         "recordrtc": "latest",
         "mkdirp": "latest",
         "atom-helpers": "latest",
-        "jquery": "latest"
+        "jquery": "latest",
+        "diff": "latest"
     }
 }
