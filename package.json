@@ -14,10 +14,10 @@
     },
     "dependencies": {
         "recordrtc": "latest",
-        "mkdirp": "latest",
         "atom-helpers": "latest",
         "jquery": "latest",
         "diff": "latest",
-        "archiver": "latest"
+        "archiver": "latest",
+		"fs-extra": "latest"
     }
 }
