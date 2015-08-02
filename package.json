@@ -1,13 +1,13 @@
 {
     "name": "voice-assist",
     "main": "./lib/voice-assist",
-    "version": "0.0.0",
-    "description": "A short description of your package",
+    "version": "0.1.0",
+    "description": "A help request platform",
     "keywords": [ ],
     "activationCommands": {
         "atom-workspace": "voice-assist:toggle"
     },
-    "repository": "https://github.com/atom/voice-assist",
+    "repository": "https://github.com/cromaLab/voice-assist",
     "license": "MIT",
     "engines": {
         "atom": ">=1.0.0 <2.0.0"
@@ -18,6 +18,8 @@
         "jquery": "latest",
         "diff": "latest",
         "archiver": "latest",
-		"fs-extra": "latest"
+		"fs-extra": "latest",
+        "request": "latest",
+        "form-data": "latest"
     }
 }

@@ -10,10 +10,10 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'voice-assist'
+      'label': 'Voice Assist'
       'submenu': [
         {
-          'label': 'Toggle'
+          'label': 'Start Recording'
           'command': 'voice-assist:toggle'
         }
       ]

@@ -1,5 +1,10 @@
-# voice-assist package
+#Voice Assist
 
-A short description of your package.
+A plugin for the [atom.io](https://atom.io) code editor. To install, first ensure [node.js](https://nodejs.org) is installed.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+After cloning this repository, run `npm install .` in the repository directory to install dependencies.
+
+Then, create a symlink to this repository under the ~/.atom/packages directory:
+```
+ln -s /path/to/this/repo ~/.atom/packages/voice-assist
+```
