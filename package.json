@@ -13,12 +13,12 @@
         "atom": ">=1.0.0 <2.0.0"
     },
     "dependencies": {
-        "recordrtc": "latest",
+        "recordrtc": "5.1.x",
         "atom-helpers": "latest",
         "jquery": "latest",
         "diff": "latest",
-        "archiver": "latest",
-		"fs-extra": "latest",
+        "archiver": "0.14.x",
+		    "fs-extra": "latest",
         "request": "latest",
         "form-data": "latest"
     }
