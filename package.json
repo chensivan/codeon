@@ -13,7 +13,7 @@
         "atom": ">=1.0.0 <2.0.0"
     },
     "dependencies": {
-        "recordrtc": "5.1.x",
+        "recordrtc": "5.1.0",
         "atom-helpers": "latest",
         "jquery": "latest",
         "diff": "latest",
