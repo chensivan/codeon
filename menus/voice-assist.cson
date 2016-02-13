@@ -6,6 +6,7 @@
       'command': 'voice-assist:toggle'
     }
   ]
+
 'menu': [
   {
     'label': 'Packages'
@@ -15,6 +16,10 @@
         {
           'label': 'Start Recording'
           'command': 'voice-assist:toggle'
+        },
+        {
+          'label': 'Show Language Viz'
+          'command': 'atom-lang-viz:toggle'
         }
       ]
     ]

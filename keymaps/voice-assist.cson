@@ -9,3 +9,4 @@
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
   'cmd-shift-e': 'voice-assist:toggle'
+  'cmd-shift-v': 'atom-lang-viz:toggle'
