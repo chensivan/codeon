@@ -1,19 +1,22 @@
 <div ng-controller='MainController'>
 	<h1>Response List</h1>
 
-	<div ng-repeat="obj in myArr" ng-click="myClick(obj)"> {{ obj.id }} </div>
+	<div ng-repeat="obj in myArr" ng-click="myClick(obj)"> <p>{{ obj.id }} </p> </div>
 
-	<div ng-controller='ShowRequest'>
+	<div ng-if='selectedObj' ng-controller='ShowRequest'>
+
 		<h2>{{selectedObj.id}}</h2>
 		<p>{{selectedObj.request}}</p>
 		<p>{{selectedObj.responseType}}</p>
 		<p>{{selectedObj.responseContent}}</p>
 		<button ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
 		<button ng-show="selectedObj" ng-click="nah(selectedObj)">Nah..</button>
-		<p>{{why}}</p>
-		<input ng-show="why">
-		<button ng-show="why">plz iterate</button>
-		
+		<div ng-show="isRejecting">
+			<p>Why?</p>
+			<input></br>
+			<button>plz iterate</button>
+		</div>
+
 	</div>
 
 
