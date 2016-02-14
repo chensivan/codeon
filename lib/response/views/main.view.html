@@ -1,4 +1,9 @@
-<body ng-controller='MainController'>
+<div ng-controller='MainController'>
 	<h1>Response List</h1>
-	<p>{{ myVariable }}</p>
-</body>
+	{{ myVariable }}
+	<div ng-repeat="obj in myArr" ng-click="myClick(obj)"> {{ obj.id }} </div>
+
+	<div ng-controller='ShowRequest'>
+		<h1>{{selectedObj.id}}</h1>
+	</div>
+</div>
