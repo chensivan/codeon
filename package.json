@@ -34,6 +34,7 @@
 	"underscore": "~1.8",
 	"highlight.js": "~9.1",
 	"angular-highlightjs": "~0.5",
-    "angular-socket-io": "~0.7"
+    "angular-socket-io": "~0.7",
+    "node-diff3": "~0.0.1"
   }
 }
