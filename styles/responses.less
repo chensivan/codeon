@@ -3,9 +3,10 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+
  atom-panel.right {
     background-color: #FFF;
-}
+ }
 .zi-mainview {
 	// background-color: red;
 	h1 {
@@ -18,8 +19,19 @@
 		width: 320px;
 		font-size: 18px;
     word-wrap: break-word;
+  }
+
 }
 
+.add {
+  background-color: 'green';
+}
+.remove{
+  background-color: 'red';
+}
+
+atom-text-editor::shadow .line .add{
+  background-color: 'green';
 }
 
 // atom-text-editor::shadow .lines .line.cursor-line {
@@ -27,7 +39,7 @@
 // }
 
 atom-text-editor::shadow .selection .region {
-background-color: LightGoldenRodYellow;
+  background-color: LightGoldenRodYellow;
 }
 
 .zi-width-resizer {
