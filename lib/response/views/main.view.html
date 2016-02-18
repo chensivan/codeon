@@ -1,3 +1,5 @@
+
+
 <div ng-controller='MainController'>
 	<h1>Response List</h1>
 
@@ -5,10 +7,17 @@
 
 	<div ng-if='selectedObj' ng-controller='ShowRequest'>
 
+
 		<h2>{{selectedObj.id}}</h2>
 		<p>{{selectedObj.request}}</p>
-		<p>Response Type: {{selectedObj.responseType}}</p>
-		<p>{{selectedObj.responseContent}}</p>
+
+		<div ng-repeat="response in selectedObj.responseContent" ng-click="subResponseClick(response)" ng-style="{ 'width' : width, 'background' : bgColor }">
+			<p>{{response.type}}</p>
+			<p>{{response.response}}</p>
+		</div>
+
+
+
 		<button ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
 		<button ng-show="selectedObj" ng-click="nah(selectedObj)">Nah..</button>
 		<div ng-show="isRejecting">
