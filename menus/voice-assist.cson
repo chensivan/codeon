@@ -15,10 +15,10 @@
       'submenu': [
         {
           'label': 'Start Recording'
-          'command': 'voice-assist:toggleVoiceRecording'
+          'command': 'voice-assist:VoiceRecording'
         },
         {
-          'label': 'Show Language Viz'
+          'label': 'Show Response List'
           'command': 'atom-lang-viz:toggle'
         }
       ]
