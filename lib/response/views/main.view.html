@@ -24,6 +24,8 @@ body {
     width: 325px;
 
 }
+
+
 </style>
 
 
@@ -32,8 +34,8 @@ body {
 <div ng-controller='MainController'>
 	<div class="panel panel2">Response List</div>
 
-	<div class="panel panel2" ng-repeat="obj in myArr" ng-click="myClick(obj)">
-		<p>{{ obj.id }} </p>
+	<div class="panel panel2" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="myClick(obj)">
+		<p>{{ obj.request }} </p>
 	</div>
 
 	<div ng-if='selectedObj' ng-controller='ShowRequest' >
