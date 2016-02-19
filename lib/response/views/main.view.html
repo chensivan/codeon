@@ -58,8 +58,9 @@ body {
 		<button ng-show="selectedObj" ng-click="nah(selectedObj)">Nah..</button>
 		<div ng-show="isRejecting">
 			<p>Why?</p>
-			<input></br>
-			<button>Please iterate!</button>
+			<input type="text" ng-model="inputs.iterationMsg">
+		  </br>
+			<button ng-click="iterate(inputs.iterationMsg)">Please iterate!</button>
 		</div>
 
 	</div>

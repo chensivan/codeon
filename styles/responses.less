@@ -55,3 +55,39 @@ atom-text-editor::shadow .selection .region {
 	cursor: col-resize;
 	z-index: 5;
 }
+
+
+.test-pkg {
+
+  height: 0; // Height is computed
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 100;
+
+  transition: opacity 100ms, visibility 0 100ms;
+
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+
+  div {
+    color:yellow;
+    padding: 14px;
+    font-size: 18px;
+    background-color: #38A824;
+  }
+
+  &.is--open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+
+    transition: opacity 100ms;
+  }
+}
+
+atom-text-editor::shadow .highlight.test-pkg-highlight .region {
+  background-color: rgb(21,100,100);
+}
