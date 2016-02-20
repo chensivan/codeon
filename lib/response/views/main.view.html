@@ -32,16 +32,16 @@ body {
 
 
 <div ng-controller='MainController'>
-	<div class="panel panel2">Response List</div>
+	<div class="panel panel2" ng-click="titleClick(title)">{{title}}</div>
 
-	<div class="panel panel2" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="myClick(obj)">
+	<div class="panel panel2" ng-show="resList" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="myClick(obj)">
 		<p>{{ obj.request }} </p>
 	</div>
 
-	<div ng-if='selectedObj' ng-controller='ShowRequest' >
+	<div ng-if="selectedObj" ng-show="responseContent" ng-controller='ShowRequest' >
 
 
-		<!-- <h2>{{selectedObj.id}}</h2> -->
+		<div class="panel panel2">Request: {{selectedObj.request}}</div>
 		<div class="panel panel2" >
 			<p>{{selectedObj.status}}</p>
 		<div>
