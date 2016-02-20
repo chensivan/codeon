@@ -31,7 +31,7 @@ body {
 
 
 
-<div ng-controller='MainController'>
+<div id="theList" ng-controller='MainController'>
 	<div class="panel panel2" ng-click="titleClick(title)">{{title}}</div>
 
 	<div class="panel panel2" ng-show="resList" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="myClick(obj)">
