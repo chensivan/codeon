@@ -1,69 +1,37 @@
 
-<style>
-body {
-    background: #eeeeee;
-}
-.panel {
-    /*display: inline-block;*/
-		/*overflow-y:disabled;*/
+<div id="theList" ng-controller='MainController' class="panel wrapper">
 
-		width: 325px;
-    background: #ffffff;
-    box-shadow:0px 0px 5px 5px #C9C9C9;
-    -webkit-box-shadow:2px 2px 5px 5x #C9C9C9;
-    -moz-box-shadow:2px 2px 5px 5px #C9C9C9;
-    margin: 10px;
-    padding: 10px;
-}
-.panel1 {
-    min-width: 100px;
-    width: 325px;
-}
-.panel2 {
-    min-width: 245px;
-    width: 325px;
-
-}
-
-
-</style>
-
-
-
-
-<div id="theList" ng-controller='MainController'>
-	<div class="panel panel2" ng-click="titleClick(title)">{{title}}</div>
-
-	<div class="panel panel2" ng-show="resList" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="myClick(obj)">
-		<p>{{ obj.request }} </p>
+	<div class="title" ng-click="titleClick(title)">
+	  <i class="ion-android-arrow-back back-arrow" ng-hide="location === 'responseList'"></i>
+	  <span class="title-text">{{selectedObj.request || title}}</span>
 	</div>
+  <div class="content-wrapper">
+    <div ng-show="resList" class="request-list">
+    	<div class="request-item" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="myClick(obj)">
+    		<p>Request: {{ obj.request }} </p>
+    	</div>
+    </div>
 
-	<div ng-if="selectedObj" ng-show="responseContent" ng-controller='ShowRequest' >
+  	<div ng-show="selectedObj && responseContent" ng-controller='ShowRequest' class="request-content">
+  		<div class="">
+  			<p>Status: <span ng-style="{'background': selectedObj.status === 'Solved' ? 'green' : 'red'}" class="status">
+  			  {{selectedObj.status}}</span>
+  			</p>
+  		</div>
+  		<div class="sub-response" ng-repeat="response in selectedObj.responseContent"
+  		  ng-click="subResponseClick(response)" ng-style="{'background' : bgColor }">
 
+  			<p class="type">Type: {{response.type}}</p>
+  			<p class="response">{{response.response}}</p>
+  		</div>
 
-		<div class="panel panel2">Request: {{selectedObj.request}}</div>
-		<div class="panel panel2" >
-			<p>{{selectedObj.status}}</p>
-		<div>
-		<div class="panel panel2" ng-repeat="response in selectedObj.responseContent" ng-click="subResponseClick(response)" ng-style="{ 'width' : width, 'background' : bgColor }">
-
-			<p>{{response.type}}</p>
-			<p>{{response.response}}</p>
-			<br>
-		</div>
-
-
-
-		<button ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
-		<button ng-show="selectedObj" ng-click="nah(selectedObj)">Nah..</button>
-		<div ng-show="isRejecting">
-			<p>Why?</p>
-			<input type="text" ng-model="inputs.iterationMsg">
-		  </br>
-			<button ng-click="iterate(inputs.iterationMsg)">Please iterate!</button>
-		</div>
-
+  		<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
+  		<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
+    </div>
 	</div>
-
-
+	<div ng-show="isRejecting" class="reject-controls">
+		<p>Why?</p>
+		<input type="text" ng-model="inputs.iterationMsg">
+		<button class="response-button" ng-click="iterate(inputs.iterationMsg)">Please iterate!</button>
+	</div>
 </div>

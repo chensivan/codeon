@@ -5,7 +5,22 @@
 
 @import "ui-variables";
 
- atom-panel.right {
+
+@color-utility: #EEE;
+@color-utility-primary: #FFF;
+
+@color-widget-text: #DDD;
+@color-widget-background: #444;
+
+@shadow-light: 0px 0px 5px 0px rgba(0,0,0,0.1);
+@shadow-medium: 0px 0px 5px 0px rgba(0,0,0,0.5);
+@shadow-medium-primary: 0px 0px 5px 0px rgba(0,0,0,0.8);
+
+@transition-duration: 250ms;
+@transition-widget-duration: 100ms;
+
+
+atom-panel.right {
     background-color: #FFF;
  }
 .zi-mainview {
@@ -42,10 +57,10 @@ atom-text-editor /deep/ .line.delete{
 // atom-text-editor::shadow .lines .line.cursor-line {
 //   background-color: red;
 // }
-
-atom-text-editor::shadow .selection .region {
-  background-color: LightGoldenRodYellow;
-}
+// 
+// atom-text-editor::shadow .selection .region {
+//   background-color: LightGoldenRodYellow;
+// }
 
 .zi-width-resizer {
 	position: absolute;
@@ -114,7 +129,7 @@ atom-text-editor::shadow .selection .region {
   transform-style: preserve-3d;
 
   div {
-    color:yellow;
+    color:green;
     padding: 14px;
     font-size: 18px;
     background-color: #38A824;
@@ -131,4 +146,193 @@ atom-text-editor::shadow .selection .region {
 
 atom-text-editor::shadow .highlight.test-pkg-highlight .region {
   background-color: rgb(21,100,100);
+}
+
+
+
+
+.panel {
+    /*display: inline-block;*/
+		overflow: auto;
+		min-width: 325px;
+		// Set this to set global width:
+		width: auto;
+    background: @color-utility-primary;
+    box-shadow: @shadow-light;
+    margin: 10px;
+    font-family: Arial, sans-serif;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+}
+
+
+.title {
+  position: relative;
+  z-index: 30;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  height: 48px;
+  line-height: 48px;
+  padding-left: 10px;
+
+  font-family: sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+
+  color: @color-widget-text;
+  background-color: @color-widget-background;
+  box-shadow: @shadow-medium;
+  cursor: default;
+
+  .back-arrow {
+    font-size: 28px;
+    margin-right: 5px;
+    opacity: 1;
+    cursor: pointer;
+
+    transition: all @transition-duration;
+
+    &.ng-hide {
+      opacity: 0;
+      margin-right: -23px;
+    }
+  }
+
+  .title-text {
+    vertical-align: top;
+  }
+
+}
+
+
+.content-wrapper {
+  overflow: hidden;
+  position: relative;
+  z-index: 20;
+  padding: 10px;
+  background-color: @color-utility-primary;
+
+  .request-list {
+    // Transition Animation
+    opacity: 1;
+    transition: all @transition-duration;
+
+    &.ng-hide {
+      position: absolute;
+      opacity: 0;
+    }
+    // End Transition Animation
+
+
+    .request-item {
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 2px;
+      background-color: rgba(0,0,0,0.1);
+      box-shadow: inset @shadow-light;
+      cursor: pointer;
+    }
+  }
+
+  .request-content {
+    // Transition Animation
+    opacity: 1;
+    transition: all @transition-duration;
+
+    &.ng-hide {
+      position: absolute;
+      opacity: 0;
+    }
+    // End Transition Animation
+    .status {
+      display: inline-block;
+      padding: 2px 5px;
+      border-radius: 2px;
+      color: @color-utility;
+      font-weight: bold;
+    }
+
+    .sub-response {
+      overflow: hidden;
+      width: 100%;
+      margin: 8px 0px;
+      border-radius: 2px;
+      box-shadow: inset @shadow-medium;
+      color: @color-utility;
+
+      .type {
+        margin: 0;
+        padding: 8px;
+        background-color: rgba(0,0,0,0.17);
+      }
+
+      .response {
+        margin: 0;
+        padding: 8px;
+      }
+    }
+  }
+}
+
+.response-button {
+  border: none;
+  outline: none;
+
+  border-radius: 2px;
+  padding: 8px 10px;
+  font-size: 16px;
+
+  color: @color-widget-text;
+  background-color: @color-widget-background;
+  box-shadow: @shadow-medium;
+  cursor: pointer;
+
+  transition: all @transition-widget-duration;
+
+  &:hover {
+    color: @color-utility-primary;
+    box-shadow: @shadow-medium-primary;
+  }
+
+  &:active {
+    background-color: darken(@color-widget-background, 50);
+    box-shadow: @shadow-medium;
+  }
+}
+
+.reject-controls {
+  position: relative;
+  z-index: 10;
+  padding: 8px;
+  margin-bottom: 0px;
+  border-top: 2px solid @color-widget-background;
+  background-color: darken(@color-utility, 10);
+
+  opacity: 1;
+  transition: opacity @transition-duration, margin @transition-duration;
+
+  &.ng-hide {
+    opacity: 0;
+    margin-top: -200px;
+    margin-bottom: 200px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 8px 10px;
+    font-size: 16px;
+    box-shadow: inset @shadow-medium;
+
+    transition: box-shadow @transition-widget-duration;
+
+    &:focus {
+      box-shadow: inset @shadow-medium-primary;
+    }
+  }
 }
