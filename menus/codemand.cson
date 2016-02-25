@@ -3,7 +3,7 @@
   'atom-text-editor': [
     {
       'label': 'Toggle CoDemand'
-      'command': 'atom-codemand:toggle'
+      'command': 'atom-codemand:toggle-recording'
     }
   ]
 
@@ -15,11 +15,11 @@
       'submenu': [
         {
           'label': 'Start Recording'
-          'command': 'atom-codemand:VoiceRecording'
+          'command': 'atom-codemand:toggle-recording'
         },
         {
-          'label': 'Show Response List'
-          'command': 'atom-codemand:toggle'
+          'label': 'Show Response Panel'
+          'command': 'atom-codemand:toggle-response-panel'
         }
       ]
     ]
