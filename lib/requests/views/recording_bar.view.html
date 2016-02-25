@@ -1,6 +1,6 @@
-<div class='voice-assist recording-bar'>
+<div ng-controller='RecordingBarController' class='voice-assist recording-bar'>
 	<span class='message'>Recording</span>
 
-	<button type='button' class='btn icon icon-primitive-square settings' ng-click='doneRecording'>Done</button>
-	<button type='button' class='btn icon icon- settings' ng-click='cancelRecording'>Cancel</button>
+	<button type='button' class='btn icon icon-primitive-square settings' ng-click='doneRecording()'>Done</button>
+	<button type='button' class='btn icon icon- settings' ng-click='cancelRecording()'>Cancel</button>
 </div>
