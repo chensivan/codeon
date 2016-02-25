@@ -1,6 +1,6 @@
 {
-  "name": "voice-assist",
-  "main": "./lib/devassist",
+  "name": "codemand",
+  "main": "./lib/codemand",
   "version": "0.1.0",
   "description": "A help request platform",
   "keywords": [],
@@ -31,7 +31,6 @@
     "less": "~2.6",
     "angular-animate": "~1.5",
   	"angular-route": "~1.4",
-  	"underscore": "~1.8",
   	"underscore": "~1.8",
   	"highlight.js": "~9.1",
   	"angular-highlightjs": "~0.5",
