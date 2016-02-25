@@ -8,5 +8,5 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
-  'cmd-shift-e': 'voice-assist:VoiceRecording'
-  'cmd-shift-v': 'atom-lang-viz:toggle'
+  'cmd-shift-e': 'atom-codemand:VoiceRecording'
+  'cmd-shift-v': 'atom-codemand:toggle'

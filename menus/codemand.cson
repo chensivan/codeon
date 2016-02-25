@@ -2,8 +2,8 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Toggle voice-assist'
-      'command': 'voice-assist:toggle'
+      'label': 'Toggle CoDemand'
+      'command': 'atom-codemand:toggle'
     }
   ]
 
@@ -11,15 +11,15 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'Voice Assist'
+      'label': 'CoDemand'
       'submenu': [
         {
           'label': 'Start Recording'
-          'command': 'voice-assist:VoiceRecording'
+          'command': 'atom-codemand:VoiceRecording'
         },
         {
           'label': 'Show Response List'
-          'command': 'atom-lang-viz:toggle'
+          'command': 'atom-codemand:toggle'
         }
       ]
     ]
