@@ -57,7 +57,7 @@ atom-text-editor /deep/ .line.delete{
 // atom-text-editor::shadow .lines .line.cursor-line {
 //   background-color: red;
 // }
-// 
+//
 // atom-text-editor::shadow .selection .region {
 //   background-color: LightGoldenRodYellow;
 // }
@@ -151,8 +151,8 @@ atom-text-editor::shadow .highlight.test-pkg-highlight .region {
 
 
 
-.panel {
-    /*display: inline-block;*/
+.codemand_panel {
+    //display: inline-block;
 		overflow: auto;
 		min-width: 325px;
 		// Set this to set global width:
@@ -166,47 +166,48 @@ atom-text-editor::shadow .highlight.test-pkg-highlight .region {
       margin-top: 0;
       margin-bottom: 0;
     }
-}
 
+    .title {
+      position: relative;
+      z-index: 30;
+      box-sizing: border-box;
+      overflow: hidden;
 
-.title {
-  position: relative;
-  z-index: 30;
-  box-sizing: border-box;
-  overflow: hidden;
+      height: 48px;
+      line-height: 48px;
+      padding-left: 10px;
 
-  height: 48px;
-  line-height: 48px;
-  padding-left: 10px;
+      font-family: sans-serif;
+      font-size: 16px;
+      white-space: nowrap;
 
-  font-family: sans-serif;
-  font-size: 16px;
-  white-space: nowrap;
+      color: @color-widget-text;
+      background-color: @color-widget-background;
+      box-shadow: @shadow-medium;
+      cursor: default;
 
-  color: @color-widget-text;
-  background-color: @color-widget-background;
-  box-shadow: @shadow-medium;
-  cursor: default;
+      .back-arrow {
+        font-size: 28px;
+        margin-right: 5px;
+        opacity: 1;
+        cursor: pointer;
 
-  .back-arrow {
-    font-size: 28px;
-    margin-right: 5px;
-    opacity: 1;
-    cursor: pointer;
+        transition: all @transition-duration;
 
-    transition: all @transition-duration;
+        &.ng-hide {
+          opacity: 0;
+          margin-right: -23px;
+        }
+      }
 
-    &.ng-hide {
-      opacity: 0;
-      margin-right: -23px;
+      .title-text {
+        vertical-align: top;
+      }
+
     }
-  }
-
-  .title-text {
-    vertical-align: top;
-  }
-
 }
+
+
 
 
 .content-wrapper {
@@ -336,3 +337,4 @@ atom-text-editor::shadow .highlight.test-pkg-highlight .region {
     }
   }
 }
+
