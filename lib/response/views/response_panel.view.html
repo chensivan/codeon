@@ -22,10 +22,11 @@
 					<p class="type">Type: {{response.type}}</p>
 					<p class="response">{{response.response}}</p>
 				</div>
+
+				<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
+				<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
+				<button class="response-button" ng-show="selectedObj" ng-click="replay(selectedObj)">Replay Response</button>
 			</div>
-			<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
-			<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
-			<button class="response-button" ng-show="selectedObj" ng-click="replay(selectedObj)">Replay Response</button>
 
 			<div ng-show="isRejecting" class="reject-controls">
 				<p>Why?</p>
