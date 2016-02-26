@@ -5,8 +5,8 @@
 	</div>
 	<div class="content-wrapper">
 		<div ng-show="resList" class="request-list">
-			<div class="request-item" ng-repeat="obj in myArr" id="{{obj.id}}" ng-click="clickRequest(obj)">
-				<p>Request: {{ obj.request }} </p>
+			<div class="request-item" ng-repeat="request in $root.requests" id="{{request.id}}" ng-click="clickRequest(request)">
+				<p>Request: {{ request.request }} </p>
 			</div>
 		</div>
 
