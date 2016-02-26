@@ -12,14 +12,16 @@
 
 		<div ng-show="selectedObj && responseContent" ng-controller='ShowRequest' class="request-content">
 			<div class="">
-				<p>Status: <span ng-style="{'background': selectedObj.status === 'Solved' ? 'green' : 'red'}" class="status">
-				{{selectedObj.status}}</span>
+				<p>Status: <span ng-style="{'background': selectedObj.status.state === 'resolved' ? 'green' : 'red'}" class="status">
+				{{selectedObj.status.state}}</span>
 				</p>
 			</div>
-			<div class="sub-response" ng-repeat="response in selectedObj.response"
-			ng-click="subResponseClick(response)" ng-style="{'background' : bgColor }">
-				<p class="type">Type: {{response.type}}</p>
-				<p class="response">{{response.response}}</p>
+			<div class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
+			ng-click="subResponseClick(helper_response)" ng-style="{'background' : bgColor }">
+				<div ng-repeat="response in helper_response" ng-show="response.type">
+					<p class="type">Type: {{response.type}}</p>
+					<p class="response">{{response.response}}</p>
+				</div>
 			</div>
 			<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
 			<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
