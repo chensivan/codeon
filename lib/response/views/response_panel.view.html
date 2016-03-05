@@ -1,75 +1,96 @@
 <div id="theList" ng-controller='ResponsePanelController' class="codemand_panel wrapper">
-	<div class="title" ng-click="titleClick(title)">
-		<i class="ion-android-arrow-back back-arrow" ng-hide="location === 'responseList'"></i>
+	<h1 class="title" ng-click="titleClick(title)">
+		<span ng-show="selectedObj && responseContent" class="mega-icon icon-chevron-left"></span>
 		<span class="title-text">{{selectedObj.request || title}}</span>
-	</div>
+	</h1>
 	<div class="content-wrapper" >
-
-
 		<div ng-show="resList" class="request-list">
-			<div class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-				<p  ng-style="{'background': request.status.state === 'new' ? 'green' : 'light gray'}">Request: {{ request.transcript }}</p>
-				<p>{{request.status.state}}</p>
+			<div ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
+				<p>{{ request.transcript }}</p>
+				<div am-time-ago="request.updated" />
+				<span class='state'>({{request.status.state}})</span>
 			</div>
 		</div>
 
-		<div ng-show="selectedObj && responseContent" ng-controller='ShowRequest' class="request-content">
-
-			<div>
-				<p>Request: {{selectedObj.transcript }} </p>
-				<p>Status: <span ng-class='selectedObj.status.state' ng-style="{'background': selectedObj.status.state === 'resolved' ? 'green' : 'red'}" class="status">
-				{{selectedObj.status.state}}</span>
-				</p>
+		<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
+			<div class='request-info'>
+				<p class='transcript'>{{selectedObj.transcript }} </p>
+				<div am-time-ago="selectedObj.updated" />
+				<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.status.state}})</span>
 			</div>
 
-
-			<div class="sub-response"  ng-repeat="helper_response in selectedObj.status.responses">
-
-				<div ng-repeat="response in helper_response.response" ng-show="response.type">
-
+			<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
+				<div  ng-repeat="response in helper_response.response" ng-show="response.type" ng-click="subResponseClick(helper_response)">
+					<!--
 					<p ng-style="{'background': 'gray'}" class="type">Type: {{response.type}}</p>
 					<p ng-style="{'background': 'black'}" class="response">{{response.response}}</p>
-					<button ng-style="{'background': 'black'}" ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
-					<button ng-style="{'background': 'black'}" ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">{{showMerge}}</button>
+					<button class='btn' ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
+					<button class='btn' ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">
+						<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
+						{{showMerge}}
+					</button>
+				-->
 
-					<div ng-controller='HelperResponse' class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
-					ng-click="subResponseClick(helper_response)" ng-style="{'background' : bgColor }">
+					<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
+					<p ng-show='response.type!=="livewriting_logs"' class='response-content'>{{response.response}}</p>
+					<button class='btn' ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
+					<button class='btn' ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">
+						<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
+						{{showMerge}}
+					</button>
 
-						<div ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
-							<p ng-style="{'background': 'gray'}" class="type">Type: {{response.type}}</p>
-							<p ng-style="{'background': 'black'}" class="response">{{response.response}}</p>
-							<button ng-style="{'background': 'black'}" ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
-							<button ng-style="{'background': 'black'}" ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">{{showMerge}}</button>
+					<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
+					 ng-style="{'background' : bgColor }">
+						<div class='response' ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
 						</div>
 					</div>
+				</div>
 
-					<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
-					<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
-					<button class="response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">Replay Response</button>
+			<button class="btn response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">
+				<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
+				Merge
+			</button>
+			<button class="btn response-button" ng-show="selectedObj" ng-click="nah()">
+				<span ng-hide="location === 'responseList'" class="icon icon-comment-discussion"></span>
+				Comment
+			</button>
+			<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">
+				<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
+				Replay Response
+			</button>
 
 
-					<div ng-show="isRejecting" class="reject-controls">
-						<p>Why?</p>
-						<input type="text" ng-model="inputs.iterationMsg">
-						<button class="response-button" ng-click="iterate(inputs.iterationMsg)">Please iterate!</button>
+			<div ng-show="isRejecting" class="reject-controls">
+				<textarea type="text" ng-model="inputs.iterationMsg" />
+				<br />
+				<button class="response-button" ng-click="iterate(inputs.iterationMsg)">
+					<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
+					Submit
+				</button>
+			</div>
+
+			<div ng-show="showSlider(response_hash_key)">
+				<div class = 'livewriting_navbar'>
+					<div id="lw_toolbar{{response_hash_key}}" class="livewriting_navbar_buttons">
+						<button id="lw_toolbar_beginning{{response_hash_key}}" class = "lw_toolbar_button">go to beginning</button>
+						<button id="lw_toolbar_slower{{response_hash_key}}" class = "lw_toolbar_button">slower</button>
+						<button id="lw_toolbar_play{{response_hash_key}}" class = "lw_toolbar_button">pause</button>
+						<button id="lw_toolbar_faster{{response_hash_key}}" class = "lw_toolbar_button">faster</button>
+						<button id="lw_toolbar_end{{response_hash_key}}" class = "lw_toolbar_button">go to end</button>
+						<span id="livewriting_speed{{response_hash_key}}">1</span>&nbsp;X
 					</div>
-	<!-- live writing time navigation bar -->
-					<div ng-show="showSlider(response_hash_key)">
-						<div class = 'livewriting_navbar'>
-							<div id="lw_toolbar{{response_hash_key}}" class="livewriting_navbar_buttons">
-								<button id="lw_toolbar_beginning{{response_hash_key}}" class = "lw_toolbar_button">go to beginning</button>
-								<button id="lw_toolbar_slower{{response_hash_key}}" class = "lw_toolbar_button">slower</button>
-								<button id="lw_toolbar_play{{response_hash_key}}" class = "lw_toolbar_button">pause</button>
-								<button id="lw_toolbar_faster{{response_hash_key}}" class = "lw_toolbar_button">faster</button>
-								<button id="lw_toolbar_end{{response_hash_key}}" class = "lw_toolbar_button">go to end</button>
-								<span id="livewriting_speed{{response_hash_key}}">1</span>&nbsp;X
-							</div>
-							<div class='livewriting_slider_wrapper'>
-								<div id = 'livewriting_slider{{response_hash_key}}' class = 'livewriting_slider'></div>
-							</div>
-						</div>
+					<div class='livewriting_slider_wrapper'>
+						<div id = 'livewriting_slider{{response_hash_key}}' class = 'livewriting_slider'></div>
 					</div>
-				
+				</div>
+			</div>
+		</div>
+		<div class='discussion'>
+			<h2 ng-show='selectedObj.status.discussion.length>0'>Discussion</h2>
+			<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
+				<div class='col-sm-12'>
+					<strong am-time-ago="iterationRequest.timestamp"></strong>: {{iterationRequest.message}}
+				</div>
 			</div>
 		</div>
 	</div>
