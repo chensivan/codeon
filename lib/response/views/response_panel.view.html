@@ -20,21 +20,12 @@
 			</div>
 
 			<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
-				<div  ng-repeat="response in helper_response.response" ng-show="response.type" ng-click="subResponseClick(helper_response)">
-					<!--
-					<p ng-style="{'background': 'gray'}" class="type">Type: {{response.type}}</p>
-					<p ng-style="{'background': 'black'}" class="response">{{response.response}}</p>
-					<button class='btn' ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
-					<button class='btn' ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">
-						<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
-						{{showMerge}}
-					</button>
-				-->
-
+				<div  ng-repeat="response in helper_response.response" ng-show="response.type">
+					
 					<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
 					<p ng-show='response.type!=="livewriting_logs"' class='response-content'>{{response.response}}</p>
-					<button class='btn' ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
-					<button class='btn' ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">
+					<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">{{showTips}}</button>
+					<button class='btn' ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
 						<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 						{{showMerge}}
 					</button>
