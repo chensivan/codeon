@@ -1,0 +1,118 @@
+@import "ui-variables";
+
+
+.add {
+ background-color: 'green';
+}
+.remove{
+ background-color: 'red';
+}
+
+atom-text-editor::shadow .line {
+  &.add {
+    background-color: rgba(0,255,0,0.2);
+  }
+
+  &.remove {
+    background-color: rgba(255,0,0,0.2);
+  }
+
+  &.nothingchanged {
+    //background-color: rgba(0,0,0,0.2);
+  }
+}
+
+//
+// atom-text-editor /deep/ .line.add{
+//  background-color: green;
+// }
+//
+// atom-text-editor /deep/ .line.remove{
+//  background-color: red;
+// }
+
+// atom-text-editor::shadow .lines .line.cursor-line {
+//   background-color: red;
+// }
+//
+// atom-text-editor::shadow .selection .region {
+//   background-color: LightGoldenRodYellow;
+// }
+
+
+
+.test-pkg .tooltip-wrapper {
+ background-color: #444;
+ box-shadow: 0px 0px 5px 0px #222;
+ padding: 5px;
+
+ .title {
+   display: inline-block;
+   height: 10px;
+   margin-right: 15px;
+ }
+
+ // http://codepen.io/brissmyr/pen/egidw/
+ .close {
+   position: absolute;
+   right: 5px;
+   top: 5px;
+   width: 15px;
+   height: 15px;
+   opacity: 0.3;
+   transition: opacity 100ms;
+
+   &:hover {
+    opacity: 1;
+   }
+   &::before, &::after {
+     position: absolute;
+     left: 6px;
+     content: ' ';
+     height: 15px;
+     width: 3px;
+     background-color: #FFF;
+   }
+   &::before {
+     transform: rotate(45deg);
+   }
+   &::after {
+     transform: rotate(-45deg);
+   }
+ }
+}
+
+.test-pkg {
+
+ height: 0; // Height is computed
+ position: absolute;
+ visibility: hidden;
+ opacity: 0;
+ pointer-events: none;
+ user-select: none;
+ z-index: 100;
+
+ transition: opacity 100ms, visibility 0 100ms;
+
+ backface-visibility: hidden;
+ transform-style: preserve-3d;
+
+ div {
+   color:green;
+   padding: 14px;
+   font-size: 18px;
+   background-color: #38A824;
+ }
+
+ &.is--open {
+   visibility: visible;
+   opacity: 1;
+   pointer-events: all;
+
+   transition: opacity 100ms;
+ }
+}
+
+atom-text-editor::shadow .highlight.test-pkg-highlight .region {
+ background-color: rgb(255,255,0);
+}
