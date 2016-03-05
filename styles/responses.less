@@ -4,7 +4,8 @@
 
 
 @import "ui-variables";
-
+// Variables
+@style-path: "./";
 
 @color-utility: #EEE;
 @color-utility-primary: #FFF;
@@ -337,3 +338,109 @@ atom-text-editor::shadow .highlight.test-pkg-highlight .region {
     }
   }
 }
+/* livewriting style*/
+.livewriting_navbar{
+  width: 100%;
+  .lw_toolbar_button{
+    color: black;
+    border: none;
+    padding: 0em;
+  }
+  .livewriting_slider{
+    width: 90%;
+    margin: 0px 5% 0px 5%;
+  }
+  .livewriting_navbar_speed{
+    vertical-align: middle;
+    text-align: center;
+    width: 5%;
+    margin: auto;
+    color: black;
+    padding: 5px;
+  }
+  .ui-corner-all{
+    border-radius : 4px;
+  }
+  .ui-slider{
+    position: relative;
+    text-align: left;
+    height:15px;
+  }
+  .ui-slider-handle{
+    position: absolute;
+    z-index: 2;
+    width: 1.2em;
+    height: 100%;
+    cursor: default;
+    -ms-touch-action: none;
+    touch-action: none;
+    margin-left: -.6em;
+    border: 1px solid #d3d3d3;
+    background: #525252;
+    font-weight: normal;
+    color: #555555;
+  }
+  /*.ui-state-default{
+    background: #e6e6e6;
+    font-weight: normal;
+    color: #555555;
+  }*/
+  .ui-widget {
+      font-family: Verdana,Arial,sans-serif;
+      font-size: 1.1em;
+  }
+  .ui-widget-content {
+    border: 1px solid #aaaaaa;
+    background: #FFFFFF;
+    color: #222222;
+  }
+  .ui-button-icon-only {
+      width: 16%;
+  }
+  .ui-button {
+      text-align: center;
+      overflow: visible;
+  }
+  .ui-state-default .ui-icon {
+    background-image: url("atom://codemand/resources/ui-icons_888888_256x240.png");
+  }
+  .livewriting_slider_wrapper {
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+  }
+  .livewriting_navbar_buttons {
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    padding: 5px
+  }
+  .ui-icon-play { background-position: 0 -160px; }
+  .ui-icon-pause { background-position: -16px -160px; }
+  .ui-icon-minusthick { background-position: -64px -128px; }
+  .ui-icon-plusthick { background-position: -32px -128px; }
+  .ui-icon-seek-end { background-position: -64px -160px; }
+  .ui-icon-seek-start { background-position: -80px -160px; }
+  .ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text {
+    padding: .4em;
+    text-indent: -9999999px;
+  }
+  .ui-button .ui-button-text {
+    display: block;
+    line-height: normal;
+  }
+  .ui-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    zoom: 1.2;
+    margin-left: 11px;
+    position: absolute;
+    margin-top: 3px;
+  }
+}
+/* live writing css end */
