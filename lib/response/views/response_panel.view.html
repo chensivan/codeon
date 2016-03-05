@@ -25,7 +25,24 @@
 
 				<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
 				<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
-				<button class="response-button" ng-show="selectedObj" ng-click="replay(helper_response)">Replay Response</button>
+				<button class="response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">Replay Response</button>
+
+<!-- live writing time navigation bar -->
+				<div ng-show="showSlider(response_hash_key)">
+					<div class = 'livewriting_navbar'>
+						<div id="lw_toolbar{{response_hash_key}}" class="livewriting_navbar_buttons">
+							<button id="lw_toolbar_beginning{{response_hash_key}}" class = "lw_toolbar_button">go to beginning</button>
+							<button id="lw_toolbar_slower{{response_hash_key}}" class = "lw_toolbar_button">slower</button>
+							<button id="lw_toolbar_play{{response_hash_key}}" class = "lw_toolbar_button">pause</button>
+							<button id="lw_toolbar_faster{{response_hash_key}}" class = "lw_toolbar_button">faster</button>
+							<button id="lw_toolbar_end{{response_hash_key}}" class = "lw_toolbar_button">go to end</button>
+							<span id="livewriting_speed{{response_hash_key}}">1</span>&nbsp;X
+						</div>
+						<div class='livewriting_slider_wrapper'>
+							<div id = 'livewriting_slider{{response_hash_key}}' class = 'livewriting_slider'></div>
+						</div>
+					</div>
+				</div>
 
 				<div ng-show="isRejecting" class="reject-controls">
 					<p>Why?</p>
