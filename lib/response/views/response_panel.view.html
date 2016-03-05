@@ -14,30 +14,47 @@
 		</div>
 
 		<div ng-show="selectedObj && responseContent" ng-controller='ShowRequest' class="request-content">
+
 			<div>
 				<p>Request: {{selectedObj.transcript }} </p>
 				<p>Status: <span ng-class='selectedObj.status.state' ng-style="{'background': selectedObj.status.state === 'resolved' ? 'green' : 'red'}" class="status">
 				{{selectedObj.status.state}}</span>
 				</p>
 			</div>
+
 			<div class="sub-response"  ng-repeat="helper_response in selectedObj.status.responses">
+
 				<div ng-repeat="response in helper_response.response" ng-show="response.type">
+
 					<p ng-style="{'background': 'gray'}" class="type">Type: {{response.type}}</p>
 					<p ng-style="{'background': 'black'}" class="response">{{response.response}}</p>
 					<button ng-style="{'background': 'black'}" ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
 					<button ng-style="{'background': 'black'}" ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">{{showMerge}}</button>
+
+					<div ng-controller='HelperResponse' class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
+					ng-click="subResponseClick(helper_response)" ng-style="{'background' : bgColor }">
+
+						<div ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
+							<p ng-style="{'background': 'gray'}" class="type">Type: {{response.type}}</p>
+							<p ng-style="{'background': 'black'}" class="response">{{response.response}}</p>
+							<button ng-style="{'background': 'black'}" ng-show="isAnnotation" ng-click="subResponseClick(helper_response)">{{showTips}}</button>
+							<button ng-style="{'background': 'black'}" ng-show="isInlineCode" ng-click="subResponseClick(helper_response)">{{showMerge}}</button>
+						</div>
+					</div>
+
+
+					<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
+					<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
+					<button class="response-button" ng-show="selectedObj" ng-click="replay(selectedObj)">Replay Response</button>
+
+					<div ng-show="isRejecting" class="reject-controls">
+						<p>Why?</p>
+						<input type="text" ng-model="inputs.iterationMsg">
+						<button class="response-button" ng-click="iterate(inputs.iterationMsg)">Please iterate!</button>
+					</div>
+
 				</div>
-			</div>
 
-
-			<button class="response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">Merge</button>
-			<button class="response-button" ng-show="selectedObj" ng-click="nah()">Nah..</button>
-			<button class="response-button" ng-show="selectedObj" ng-click="replay(selectedObj)">Replay Response</button>
-
-			<div ng-show="isRejecting" class="reject-controls">
-				<p>Why?</p>
-				<input type="text" ng-model="inputs.iterationMsg">
-				<button class="response-button" ng-click="iterate(inputs.iterationMsg)">Please iterate!</button>
 			</div>
 		</div>
 	</div>
