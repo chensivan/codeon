@@ -12,7 +12,7 @@
 					<span class='state'>({{request.notification}})</span>
 				</div>
 			</div>
-			<button ng-show="resList" ng-click="newRequest()">Make a request</button>
+			<button ng-show="resList" id="makeRequest" ng-click="newRequest()">Make a request</button>
 
 
 		<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
