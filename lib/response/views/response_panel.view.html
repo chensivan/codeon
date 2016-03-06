@@ -9,17 +9,17 @@
 			<div ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
 				<p>{{ request.transcript }}</p>
 				<div am-time-ago="request.updated" />
-					<span class='state'>({{request.status.state}})</span>
+					<span class='state'>({{request.notification}})</span>
 				</div>
 			</div>
-			<button ng-click="newRequest()">Make a request</button>
+			<button ng-show="resList" ng-click="newRequest()">Make a request</button>
 
 
 		<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
 			<div class='request-info'>
 				<p class='transcript'>{{selectedObj.transcript }} </p>
 				<div am-time-ago="selectedObj.updated" />
-					<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.status.state}})</span>
+					<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span>
 				</div>
 
 			<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
