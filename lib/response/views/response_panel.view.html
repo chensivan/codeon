@@ -22,9 +22,11 @@
 					<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span>
 				</div>
 
+			<!-- details of one response  -->
 			<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
-				<div  ng-repeat="response in helper_response.response" ng-show="response.type">
 
+				<!-- display each answer in the response -->
+				<div ng-repeat="response in helper_response.response" ng-show="response.type">
 					<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
 					<p ng-show='response.type!=="livewriting_logs"' class='response-content'>{{response.response}}</p>
 					<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">{{response.showTip}}</button>
@@ -32,7 +34,6 @@
 						<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 						{{response.showMerge}}
 					</button>
-
 					<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
 					 ng-style="{'background' : bgColor }">
 						<div class='response' ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
@@ -40,6 +41,7 @@
 					</div>
 				</div>
 
+				<!-- accept, reject and replay buttons -->
 				<button class="btn response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">
 					<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 					Merge
@@ -53,7 +55,7 @@
 					Replay
 				</button>
 
-
+				<!-- reject action -->
 				<div ng-show="isRejecting" class="reject-controls">
 					<textarea type="text" ng-model="inputs.iterationMsg" />
 					<br />
@@ -63,6 +65,7 @@
 					</button>
 				</div>
 
+				<!-- replay feature -->
 				<div ng-show="showSlider(response_hash_key)">
 					<div class = 'livewriting_navbar'>
 						<div id="lw_toolbar{{response_hash_key}}" class="livewriting_navbar_buttons">
@@ -78,6 +81,8 @@
 						</div>
 					</div>
 				</div>
+
+				<hr>
 			</div>
 
 			<div class='discussion'>
