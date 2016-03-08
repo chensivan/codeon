@@ -5,93 +5,110 @@
 	</h1>
 
 	<div class="content-wrapper" >
-		<div ng-show="resList" class="request-list">
+		<div ng-show="resList" class="request-list" style="overflow: auto !important">
 			<div ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
 				<p>{{ request.transcript }}</p>
 				<div am-time-ago="request.updated" />
 					<span class='state'>({{request.notification}})</span>
 				</div>
 			</div>
+
 			<button ng-show="resList" id="makeRequest" ng-click="newRequest()">Make a request</button>
 
 
-		<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
-			<div class='request-info'>
-				<p class='transcript'>{{selectedObj.transcript }} </p>
-				<div am-time-ago="selectedObj.updated" />
-					<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span>
-				</div>
+			<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
 
-			<!-- details of one response  -->
-			<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
+				<div class='request-info'>
+					<p class='transcript'>{{selectedObj.transcript }} </p>
+					<div am-time-ago="selectedObj.updated" />
+						<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span>
+					</div>
 
-				<!-- display each answer in the response -->
-				<div ng-repeat="response in helper_response.response" ng-show="response.type">
-					<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
-					<p ng-show='response.type!=="livewriting_logs"' class='response-content'>{{response.response}}</p>
-					<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">{{response.showTip}}</button>
-					<button class='btn' ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
-						<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
-						{{response.showMerge}}
-					</button>
-					<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
-					 ng-style="{'background' : bgColor }">
-						<div class='response' ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
+
+
+					<!-- details of one response  -->
+					<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
+
+						<!-- add collapse div here -->
+						<a href="#" ng-click="collapse(helper_response)">Click to view response {{$index+1}}:</a>
+
+						<div ng-show="helper_response.collapse">
+							<!-- display each answer in the response -->
+							<div ng-repeat="response in helper_response.response" ng-show="response.type">
+								<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
+								<p ng-show='response.type!=="livewriting_logs"' class='response-content'>{{response.response}}</p>
+								<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">{{response.showTip}}</button>
+								<button class='btn' ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
+									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
+									{{response.showMerge}}
+								</button>
+								<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
+								 ng-style="{'background' : bgColor }">
+									<div class='response' ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
+									</div>
+								</div>
+							</div>
+
+							<!-- accept, reject and replay buttons -->
+							<button class="btn response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">
+								<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
+								Merge
+							</button>
+							<button class="btn response-button" ng-show="selectedObj" ng-click="nah()">
+								<span ng-hide="location === 'responseList'" class="icon icon-comment-discussion"></span>
+								Comment
+							</button>
+							<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">
+								<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
+								Replay
+							</button>
+
+							<!-- reject action -->
+							<div ng-show="isRejecting" class="reject-controls">
+								<textarea type="text" ng-model="inputs.iterationMsg" />
+								<br />
+								<button class="response-button" ng-click="iterate(inputs.iterationMsg)">
+									<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
+									Submit
+								</button>
+							</div>
+
+							<!-- replay feature -->
+							<div ng-show="showSlider(response_hash_key)">
+								<div class = 'livewriting_navbar'>
+									<div id="lw_toolbar{{response_hash_key}}" class="livewriting_navbar_buttons">
+										<button id="lw_toolbar_beginning{{response_hash_key}}" class = "lw_toolbar_button">go to beginning</button>
+										<button id="lw_toolbar_slower{{response_hash_key}}" class = "lw_toolbar_button">slower</button>
+										<button id="lw_toolbar_play{{response_hash_key}}" class = "lw_toolbar_button">pause</button>
+										<button id="lw_toolbar_faster{{response_hash_key}}" class = "lw_toolbar_button">faster</button>
+										<button id="lw_toolbar_end{{response_hash_key}}" class = "lw_toolbar_button">go to end</button>
+										<span id="livewriting_speed{{response_hash_key}}">1</span>&nbsp;X
+									</div>
+									<div class='livewriting_slider_wrapper'>
+										<div id = 'livewriting_slider{{response_hash_key}}' class = 'livewriting_slider'></div>
+									</div>
+								</div>
+							</div>
+
+							<hr>
+
+					  </div>
+
+				  </div>
+
+					<div class='discussion'>
+						<h2 ng-show='selectedObj.status.discussion.length>0'>Discussion</h2>
+						<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
+							<div class='col-sm-12'>
+								<strong am-time-ago="iterationRequest.timestamp"></strong>: {{iterationRequest.message}}
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- accept, reject and replay buttons -->
-				<button class="btn response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">
-					<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
-					Merge
-				</button>
-				<button class="btn response-button" ng-show="selectedObj" ng-click="nah()">
-					<span ng-hide="location === 'responseList'" class="icon icon-comment-discussion"></span>
-					Comment
-				</button>
-				<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">
-					<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
-					Replay
-				</button>
+			  </div>
 
-				<!-- reject action -->
-				<div ng-show="isRejecting" class="reject-controls">
-					<textarea type="text" ng-model="inputs.iterationMsg" />
-					<br />
-					<button class="response-button" ng-click="iterate(inputs.iterationMsg)">
-						<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
-						Submit
-					</button>
-				</div>
+	 		</div>
 
-				<!-- replay feature -->
-				<div ng-show="showSlider(response_hash_key)">
-					<div class = 'livewriting_navbar'>
-						<div id="lw_toolbar{{response_hash_key}}" class="livewriting_navbar_buttons">
-							<button id="lw_toolbar_beginning{{response_hash_key}}" class = "lw_toolbar_button">go to beginning</button>
-							<button id="lw_toolbar_slower{{response_hash_key}}" class = "lw_toolbar_button">slower</button>
-							<button id="lw_toolbar_play{{response_hash_key}}" class = "lw_toolbar_button">pause</button>
-							<button id="lw_toolbar_faster{{response_hash_key}}" class = "lw_toolbar_button">faster</button>
-							<button id="lw_toolbar_end{{response_hash_key}}" class = "lw_toolbar_button">go to end</button>
-							<span id="livewriting_speed{{response_hash_key}}">1</span>&nbsp;X
-						</div>
-						<div class='livewriting_slider_wrapper'>
-							<div id = 'livewriting_slider{{response_hash_key}}' class = 'livewriting_slider'></div>
-						</div>
-					</div>
-				</div>
-
-				<hr>
-			</div>
-
-			<div class='discussion'>
-				<h2 ng-show='selectedObj.status.discussion.length>0'>Discussion</h2>
-				<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
-					<div class='col-sm-12'>
-						<strong am-time-ago="iterationRequest.timestamp"></strong>: {{iterationRequest.message}}
-					</div>
-				</div>
-			</div>
-	 </div>
+		</div>
+	</div>
 </div>
