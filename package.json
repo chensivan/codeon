@@ -1,10 +1,10 @@
 {
-  "name": "codemand",
-  "main": "./lib/codemand",
+  "name": "codeon",
+  "main": "./lib/codeon",
   "version": "0.1.0",
   "description": "A help request platform",
   "keywords": [],
-  "repository": "https://github.com/cromaLab/voice-assist",
+  "repository": "https://github.com/cromaLab/atom-codeon",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
