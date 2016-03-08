@@ -2,8 +2,8 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Toggle CoDemand'
-      'command': 'atom-codemand:toggle-recording'
+      'label': 'Toggle Codeon'
+      'command': 'atom-codeon:toggle-recording'
     }
   ]
 
@@ -11,15 +11,15 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'CoDemand'
+      'label': 'Codeon'
       'submenu': [
         {
           'label': 'Start Recording'
-          'command': 'atom-codemand:toggle-recording'
+          'command': 'atom-codeon:toggle-recording'
         },
         {
           'label': 'Show Response Panel'
-          'command': 'atom-codemand:toggle-response-panel'
+          'command': 'atom-codeon:toggle-response-panel'
         }
       ]
     ]
