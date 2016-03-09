@@ -9,7 +9,7 @@
 			<div ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
 				<p>{{ request.transcript }}</p>
 				<div am-time-ago="request.updated" />
-					<span class='state'>({{request.notification}})</span>
+					<span ng-hide='request.hasView' class='state'>({{request.notification}})</span>
 				</div>
 			</div>
 
@@ -21,7 +21,7 @@
 				<div class='request-info'>
 					<p class='transcript'>{{selectedObj.transcript }} </p>
 					<div am-time-ago="selectedObj.updated" />
-						<span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span>
+						<!-- <span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span> -->
 					</div>
 
 
