@@ -7,10 +7,11 @@
 	<div class="content-wrapper" >
 		<div ng-show="resList" class="request-list">
 			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-				<p>{{ request.transcript }}</p>
+				<p>Request: {{ request.transcript }}</p>
 				<div am-time-ago="request.updated"/>
 					<span class='state'>({{request.notification}})</span>
-					<button ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove!</button>
+					<button ng-click="hideRequest(request); $event.stopPropagation();">Play Request</button>
+					<button ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button>
 				</div>
 
 			</div>
