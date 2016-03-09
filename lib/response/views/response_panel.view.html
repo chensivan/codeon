@@ -5,12 +5,14 @@
 	</h1>
 
 	<div class="content-wrapper" >
-		<div ng-show="resList" class="request-list" style="overflow: auto !important">
-			<div ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
+		<div ng-show="resList" class="request-list">
+			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
 				<p>{{ request.transcript }}</p>
-				<div am-time-ago="request.updated" />
-					<span ng-hide='request.hasView' class='state'>({{request.notification}})</span>
+				<div am-time-ago="request.updated"/>
+					<span class='state'>({{request.notification}})</span>
+					<button ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove!</button>
 				</div>
+
 			</div>
 
 			<button ng-show="resList" id="makeRequest" ng-click="newRequest()">Make a request</button>
