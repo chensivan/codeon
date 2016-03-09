@@ -38,7 +38,7 @@
 								<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
 								<p ng-show='(response.type!=="livewriting_logs") && (response.type!=="inlinecode")' class='response-content'>{{response.response}}</p>
 								<p ng-class='"merge"' ng-show='response.mergeConflict'>There is a merge conflict with this response. Please resolve it by yourself!</p>
-								<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">{{response.showTip}}</button>
+								<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">Show me!</button>
 								<button class='btn' ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 									{{response.showMerge}}
