@@ -31,6 +31,14 @@
 				<div class='request-info'>
 					<p class='transcript'>{{selectedObj.transcript }} </p>
 					<div am-time-ago="selectedObj.updated" />
+					<button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
+						<span ng-if="!selectedObj.playing">
+							Play Request
+						</span>
+						<span ng-if="selectedObj.playing">
+							Stop
+						</span>
+					</button>
 						<!-- <span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span> -->
 					</div>
 
