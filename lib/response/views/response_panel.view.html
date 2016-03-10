@@ -10,7 +10,14 @@
 				<p>Request: {{ request.transcript }}</p>
 				<div am-time-ago="request.updated"/>
 					<span class='state'>({{request.notification}})</span>
-					<button ng-click="hideRequest(request); $event.stopPropagation();">Play Request</button>
+					<button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
+						<span ng-if="!request.playing">
+							Play Request
+						</span>
+						<span ng-if="request.playing">
+							Stop
+						</span>
+					</button>
 					<button ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button>
 				</div>
 
