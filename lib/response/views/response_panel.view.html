@@ -29,7 +29,13 @@
 			<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
 
 				<div class='request-info'>
-					<p class='transcript'>{{selectedObj.transcript }} </p>
+					<p class='transcript'>Request: {{selectedObj.transcript }} </p>
+					<input ng-model="inputs.editedRequest" ng-show="selectedObj.edit"></input>
+					<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
+					<button ng-hide="selectedObj.edit" ng-click="editRequest(selectedObj)">Edit </button>
+					<button ng-show="selectedObj.edit" ng-click="changeRequest(inputs.editedRequest, selectedObj)">Done</button>
+					<button ng-show="selectedObj.edit" ng-click="cancelRequest(selectedObj)">Cancel</button>
+
 					<div am-time-ago="selectedObj.updated" />
 					<button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
 						<span ng-if="!selectedObj.playing">
@@ -84,7 +90,7 @@
 
 							<!-- reject action -->
 							<div ng-show="isRejecting" class="reject-controls">
-								<textarea type="text" ng-model="inputs.iterationMsg" />
+								<textarea ng-model="inputs.iterationMsg" />
 								<br />
 								<button class="response-button" ng-click="iterate(inputs.iterationMsg)">
 									<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
