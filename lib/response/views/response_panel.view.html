@@ -6,38 +6,44 @@
 
 	<div class="content-wrapper" >
 		<div ng-show="resList" class="request-list">
-			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-				<p>Request: {{ request.transcript }}</p>
-				<div am-time-ago="request.updated"/>
-					<span class='state'>({{request.notification}})</span>
-					<button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
-						<span ng-if="!request.playing">
-							Play Request
-						</span>
-						<span ng-if="request.playing">
-							Stop
-						</span>
-					</button>
-					<button ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button>
+			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
+				<h2 class='transcript'>Title: {{request.title }} </h2>
+				<p class='transcript'>Transcription: {{request.transcript }} </p>
+					<div>
+						<span class='state'>({{request.notification}})</span>
+						<span am-time-ago="request.updated"/>
+					</div>
+					<div class="request-buttons">
+						<button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
+							<span ng-if="!request.playing">
+								Play Request
+							</span>
+							<span ng-if="request.playing">
+								Stop
+							</span>
+						</button>
+						<button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button>
+				</div>
 				</div>
 
 			</div>
 
-			<button ng-show="resList" id="makeRequest" ng-click="newRequest()">Make a request</button>
+			<button class = "btn btn-default" ng-show="resList" id="makeRequest" ng-click="newRequest()"><h2>Make a request</h2></button>
 
 
 			<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
 
 				<div class='request-info'>
-					<p class='transcript'>Request: {{selectedObj.transcript }} </p>
-					<input ng-model="inputs.editedRequest" ng-show="selectedObj.edit"></input>
+					<h2 class='transcript'>Title: {{selectedObj.title }} </h2>
+					<p class='transcript'>Transcription: {{selectedObj.transcript }} </p>
+					<input ng-model="inputs.editedRequest" ng-show="selectedObj.edit" class = "native-key-bindings form-control" tabindex="-1"></input>
 					<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
-					<button ng-hide="selectedObj.edit" ng-click="editRequest(selectedObj)">Edit </button>
-					<button ng-show="selectedObj.edit" ng-click="changeRequest(inputs.editedRequest, selectedObj)">Done</button>
-					<button ng-show="selectedObj.edit" ng-click="cancelRequest(selectedObj)">Cancel</button>
+					<button class = "btn btn-default" ng-hide="selectedObj.edit" ng-click="editRequest(selectedObj)">Edit </button>
+					<button class = "btn btn-default" ng-show="selectedObj.edit" ng-click="changeRequest(inputs.editedRequest, selectedObj)">Done</button>
+					<button class = "btn btn-default" ng-show="selectedObj.edit" ng-click="cancelRequest(selectedObj)">Cancel</button>
 
 					<div am-time-ago="selectedObj.updated" />
-					<button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
+					<button class = "btn btn-default" ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
 						<span ng-if="!selectedObj.playing">
 							Play Request
 						</span>
@@ -62,8 +68,8 @@
 								<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
 								<p ng-show='(response.type!=="livewriting_logs") && (response.type!=="inlinecode")' class='response-content'>{{response.response}}</p>
 								<p ng-class='"merge"' ng-show='response.mergeConflict'>There is a merge conflict with this response. Please resolve it by yourself!</p>
-								<button class='btn' ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">Show me!</button>
-								<button class='btn' ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
+								<button class = "btn btn-default"  ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">Show me!</button>
+								<button class = "btn btn-default"  ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 									{{response.showMerge}}
 								</button>
@@ -85,14 +91,14 @@
 							</button>
 							<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">
 								<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
-								Replay
+								Code Replay
 							</button>
 
 							<!-- reject action -->
 							<div ng-show="isRejecting" class="reject-controls">
 								<textarea ng-model="inputs.iterationMsg" />
 								<br />
-								<button class="response-button" ng-click="iterate(inputs.iterationMsg)">
+								<button class="btn response-button" ng-click="iterate(inputs.iterationMsg)">
 									<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
 									Submit
 								</button>
