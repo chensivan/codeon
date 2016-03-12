@@ -6,5 +6,5 @@ After cloning this repository, run `npm install .` in the repository directory t
 
 Then, create a symlink to this repository under the ~/.atom/packages directory:
 ```
-ln -s /path/to/this/repo ~/.atom/packages/codeon
+ln -s /path/to/this/repo ~/.atom/packages/atom-codeon
 ```
