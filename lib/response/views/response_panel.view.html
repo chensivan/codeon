@@ -35,10 +35,16 @@
 
 				<div class='request-info'>
 					<h2 class='transcript'>Title: {{selectedObj.title }} </h2>
+					<input ng-model="inputs.editedTitle" ng-show="selectedObj.editTitle" class = "native-key-bindings form-control" tabindex="-1"></input>
+					<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
+					<button class = "btn btn-default" ng-hide="selectedObj.editTitle" ng-click="editTitle(selectedObj)">Edit Title</button>
+					<button class = "btn btn-default" ng-show="selectedObj.editTitle" ng-click="changeTitle(inputs.editedTitle, selectedObj)">Done</button>
+					<button class = "btn btn-default" ng-show="selectedObj.editTitle" ng-click="cancelTitle(selectedObj)">Cancel</button>
+
 					<p class='transcript'>Transcription: {{selectedObj.transcript }} </p>
 					<input ng-model="inputs.editedRequest" ng-show="selectedObj.edit" class = "native-key-bindings form-control" tabindex="-1"></input>
 					<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
-					<button class = "btn btn-default" ng-hide="selectedObj.edit" ng-click="editRequest(selectedObj)">Edit </button>
+					<button class = "btn btn-default" ng-hide="selectedObj.edit" ng-click="editRequest(selectedObj)">Edit Transcript</button>
 					<button class = "btn btn-default" ng-show="selectedObj.edit" ng-click="changeRequest(inputs.editedRequest, selectedObj)">Done</button>
 					<button class = "btn btn-default" ng-show="selectedObj.edit" ng-click="cancelRequest(selectedObj)">Cancel</button>
 
@@ -95,7 +101,7 @@
 							</button>
 
 							<!-- reject action -->
-							<div ng-show="isRejecting" class="reject-controls">
+							<div ng-hide="isRejecting" class="reject-controls">
 								<textarea ng-model="inputs.iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "(e.g. javascript event handler syntax)"/>
 								<br />
 								<button class="btn response-button" ng-click="iterate(inputs.iterationMsg)">
