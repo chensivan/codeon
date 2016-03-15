@@ -1,17 +1,13 @@
 <div ng-controller='RequestPromptController' class='code-on-request-prompt'>
-  <div ng-hide = "COUNTDOWN"  >
-    <h2>Briefly name your request. (e.g. javascript event handler syntax)</h2>
-  </div>
-  <div ng-hide = "COUNTDOWN">
-    <textarea  ng-model = "requestTitle" id = "request-title" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "(e.g. javascript event handler syntax)"/>
-  </div>
-  <div ng-hide = "COUNTDOWN">
-    <h2>Pressing "Start Recording" button below will start recording your voice and text written in the editor. Be ready to speak!</h2>
-  </div>
-  <div ng-hide = "COUNTDOWN" class="prompt_buttons">
-  	<button type='button' class='btn btn-default icon icon-primitive-dot settings h3_size' ng-click='startRecording()'>Start Recording</button>
-  	<button type='button' class='btn btn-default icon settings h3_size' ng-click='cancelPrompt()'>Cancel</button>
-  </div>
+    <form ng-submit='startRecording()' ng-hide='COUNTDOWN'>
+        <h2>Briefly name your request. (e.g. javascript event handler syntax)</h2>
+        <textarea  ng-model = "requestTitle" id = "request-title" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "(e.g. javascript event handler syntax)"/>
+        <h2>Pressing "Start Recording" button below will start recording your voice and text written in the editor. Be ready to speak!</h2>
+          <div ng-hide = "COUNTDOWN" class="prompt_buttons">
+          	<button id='startRecording' type='button' class='btn btn-default icon icon-primitive-dot settings h3_size' ng-click='startRecording()'>Start Recording</button>
+          	<button id='cancelRecording' type='button' class='btn btn-default icon settings h3_size' ng-click='cancelPrompt()'>Cancel</button>
+          </div>
+    </form>
 
   <div ng-show = "COUNTDOWN" class = "big_countdown">
   	<span class = "in_red">{{COUNTDOWN_NUMBER}}</span>
