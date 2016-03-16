@@ -8,3 +8,7 @@ Then, create a symlink to this repository under the ~/.atom/packages directory:
 ```
 ln -s /path/to/this/repo ~/.atom/packages/atom-codeon
 ```
+
+You can toggle request list using CMD + SHIFT + V.
+
+You can start recording using CMD + SHIFT + E.
