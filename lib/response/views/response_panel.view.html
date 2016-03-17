@@ -9,7 +9,7 @@
 	<div class="content-wrapper" >
 		<div ng-show="resList" class="request-list">
 			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-				<h2 class='transcript'>Title: {{request.title }} </h2>
+				<!-- <h2 class='transcript'>Title: {{request.title }} </h2> -->
 				<p class='transcript'>Transcription: {{request.transcript }} </p>
 					<div>
 						<span class='state'>({{request.notification}})</span>
@@ -103,7 +103,7 @@
 							</button>
 
 							<!-- reject action -->
-							<div ng-hide="isRejecting" class="reject-controls">
+							<div ng-show="isRejecting" class="reject-controls">
 								<textarea ng-model="inputs.iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "(e.g. javascript event handler syntax)"/>
 								<br />
 								<button class="btn response-button" ng-click="iterate(inputs.iterationMsg)">
