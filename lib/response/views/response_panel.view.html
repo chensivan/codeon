@@ -36,7 +36,7 @@
 			<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
 
 				<div class='request-info'>
-					<h2 class='transcript'>Title: {{selectedObj.title }} </h2>
+					<!-- <h2 class='transcript'>Title: {{selectedObj.title }} </h2> -->
 					<input ng-model="inputs.editedTitle" ng-show="selectedObj.editTitle" class = "native-key-bindings form-control" tabindex="-1"></input>
 					<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
 					<button class = "btn btn-default" ng-hide="selectedObj.editTitle" ng-click="editTitle(selectedObj)">Edit Title</button>
@@ -93,24 +93,13 @@
 								<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 								Merge
 							</button>
-							<button class="btn response-button" ng-show="selectedObj" ng-click="nah()">
-								<span ng-hide="location === 'responseList'" class="icon icon-comment-discussion"></span>
-								Comment
-							</button>
+
 							<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">
 								<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
 								Code Replay
 							</button>
 
-							<!-- reject action -->
-							<div ng-show="isRejecting" class="reject-controls">
-								<textarea ng-model="inputs.iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "(e.g. javascript event handler syntax)"/>
-								<br />
-								<button class="btn response-button" ng-click="iterate(inputs.iterationMsg)">
-									<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
-									Submit
-								</button>
-							</div>
+
 
 							<!-- replay feature -->
 							<!--
@@ -134,15 +123,34 @@
 
 					  </div>
 -->
-				  </div>
+				  	</div>
+					</div>
 
 					<div class='discussion'>
-						<h2 ng-show='selectedObj.status.discussion.length>0'>Discussion</h2>
+						<!-- <h2 ng-show='selectedObj.status.discussion.length>0'>Discussion</h2> -->
+						<h2>Discussion</h2>
+
 						<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
 							<div class='col-sm-12'>
 								<strong am-time-ago="iterationRequest.timestamp"></strong>: {{iterationRequest.message}}
 							</div>
 						</div>
+<!--
+						<button class="btn response-button" ng-show="selectedObj" ng-click="nah()">
+							<span ng-hide="location === 'responseList'" class="icon icon-comment-discussion"></span>
+							Comment
+						</button> -->
+
+						<!-- reject action -->
+						<div class="reject-controls">
+							<textarea ng-model="inputs.iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "Discuss responses with helper ... "/>
+							<br />
+							<button class="btn response-button" ng-click="iterate(inputs.iterationMsg)">
+								<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
+								Submit
+							</button>
+						</div>
+
 					</div>
 
 			  </div>
