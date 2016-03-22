@@ -45,6 +45,8 @@ atom-text-editor::shadow .line {
  background-color: #444;
  box-shadow: 0px 0px 5px 0px #222;
  padding: 5px;
+ border-radius: 6px;
+
 
  .title {
    display: inline-block;
@@ -55,11 +57,11 @@ atom-text-editor::shadow .line {
  // http://codepen.io/brissmyr/pen/egidw/
  .close {
    position: absolute;
-   right: 5px;
-   top: 5px;
+   right: 10px;
+   top: 10px;
    width: 15px;
    height: 15px;
-   opacity: 0.3;
+   opacity: 2.3;
    transition: opacity 100ms;
 
    &:hover {
@@ -98,10 +100,10 @@ atom-text-editor::shadow .line {
  transform-style: preserve-3d;
 
  div {
-   color:green;
+   color:black;
    padding: 14px;
    font-size: 18px;
-   background-color: #38A824;
+   background-color: gray;
  }
 
  &.is--open {
