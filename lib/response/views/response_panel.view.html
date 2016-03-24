@@ -23,7 +23,7 @@
 							</span>
 						</button>
 						<button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button>
-				</div>
+				 </div>
 				</div>
 
 			</div>
@@ -79,6 +79,10 @@
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 									{{response.showMerge}}
 								</button>
+								<button class="btn response-button" ng-show="response.type==='inlinecode'" ng-click="merge(selectedObj)">
+									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
+									Merge
+								</button>
 								<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
 								 ng-style="{'background' : bgColor }">
 									<div class='response' ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
@@ -87,10 +91,7 @@
 							</div>
 
 							<!-- accept, reject and replay buttons -->
-							<button class="btn response-button" ng-show="selectedObj" ng-click="merge(selectedObj)">
-								<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
-								Merge
-							</button>
+
 
 							<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response,response_hash_key)">
 								<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
@@ -142,9 +143,9 @@
 						<!-- reject action -->
 
 						<div class="reject-controls">
-							<textarea ng-model="inputs.iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "Discuss responses with helper ... "/>
+							<textarea ng-model="iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "Discuss responses with helper ... "/>
 							<br />
-							<button class="btn response-button" ng-click="iterate(inputs.iterationMsg)">
+							<button class="btn response-button" ng-click="iterate(iterationMsg)">
 								<span ng-hide="location === 'responseList'" class="icon icon-comment"></span>
 								Submit
 							</button>
