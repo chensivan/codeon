@@ -1,6 +1,7 @@
 <div id="theList" ng-controller='ResponsePanelController' class="codeon_panel wrapper">
 	<h1 class="title" ng-click="titleClick(title)">
 		<span ng-show="selectedObj && responseContent" class="mega-icon icon-chevron-left"></span>
+		<button class="mega-icon icon-chevron-right"></button>
 		<span class="title-text">{{selectedObj.request || title}}</span>
 	</h1>
 
@@ -71,7 +72,10 @@
 						<div ng-show="helper_response.collapse">
 							<!-- display each answer in the response -->
 							<div ng-repeat="response in helper_response.response" ng-show="response.type">
-								<div ng-show='response.type!=="livewriting_logs"' class='response-type'>{{response.type}}</div>
+								<div ng-show='response.type!=="livewriting_logs" && response.type!=="inlinecode"' class='response-type'>{{response.type}}</div>
+								<div ng-show='response.type!=="livewriting_logs" && response.type==="inlinecode"' class='response-type'>
+									{{response.type}} in {{mySplit(response)}}
+								</div>
 								<p ng-show='(response.type!=="livewriting_logs") && (response.type!=="inlinecode")' class='response-content'>{{response.response}}</p>
 								<p ng-class='"merge"' ng-show='response.mergeConflict'>There is a merge conflict with this response. Please resolve it by yourself!</p>
 								<button class = "btn btn-default"  ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">Show me!</button>
@@ -82,19 +86,19 @@
 								</button> -->
 
 								<form ng-show="response.type==='inlinecode'">
-								  <label>
+									<label>
 								    <input type="radio" ng-model="values" ng-click="helperVersion(response)" value="helper">
-								    Keep helper's code
+								    View helper's code response
 								  </label><br/>
 								  <label>
 								    <input type="radio" ng-model="values" ng-click="myVersion(response)" value="my">
-								    Keep my code
+								    View my current code
 								  </label><br/>
 								  <label>
 								    <input type="radio" ng-model="values" ng-click="githubVersion(response)" value="both">
-								    Show github like code diff
+								    Show github like code difference
 								  </label><br/>
-								 </form>
+							 </form>
 
 								<!-- <button class="btn response-button" ng-show="response.type==='inlinecode'" ng-click="merge(selectedObj)">
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
@@ -115,9 +119,7 @@
 								<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
 								Code Replay
 							</button>
-
-
-
+							<hr style="height:5px; background-color: red">
 							<!-- replay feature -->
 							<!--
 						<div ng-show="showSlider(response_hash_key)">
