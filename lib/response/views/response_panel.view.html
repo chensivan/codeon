@@ -61,7 +61,7 @@
 					</div>
 
 
-
+					<h6 ng-show="selectedObj.status.responses==0">(Currently there is no response)</h6>
 					<!-- details of one response  -->
 					<div ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses">
 
