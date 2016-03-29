@@ -71,43 +71,48 @@
 
 						<div ng-show="helper_response.collapse">
 							<!-- display each answer in the response -->
-							<div ng-repeat="response in helper_response.response" ng-show="response.type">
-								<div ng-show='response.type!=="livewriting_logs" && response.type!=="inlinecode"' class='response-type'>{{response.type}}</div>
-								<div ng-show='response.type!=="livewriting_logs" && response.type==="inlinecode"' class='response-type'>
-									{{response.type}} in {{mySplit(response)}}
+							<div ng-repeat="answer in helper_response.answers" ng-show="answer.type">
+								<div ng-show='answer.type!=="livewriting_logs" && answer.type!=="inlinecode"' class='response-type'>{{answer.type}}</div>
+								<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"' class='response-type'>
+									{{answer.type}} in {{mySplit(answer)}}
 								</div>
-								<p ng-show='(response.type!=="livewriting_logs") && (response.type!=="inlinecode")' class='response-content'>{{response.response}}</p>
-								<p ng-class='"merge"' ng-show='response.mergeConflict'>There is a merge conflict with this response. Please resolve it by yourself!</p>
-								<button class = "btn btn-default"  ng-show="response.type==='annotation'" ng-click="annotationResponse(response)">Show me!</button>
 
-								<!-- <button class = "btn btn-default"  ng-show="response.type==='inlinecode'" ng-click="inlineCodeResponse(response)">
+								<p ng-show='(answer.type==="livewriting_logs") && (answer.type!=="inlinecode")&& (answer.type!=="voice")' class='response-content'>{{answer.value}}</p>
+								<a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")  ' class='response-content'>
+									Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="isVoicePlaying">Click to stop. </a>
+
+								<p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p>
+								<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer)">Show me!</button>
+
+								<!-- <button class = "btn btn-default"  ng-show="answer.type==='inlinecode'" ng-click="inlineCodeResponse(answer)">
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
-									{{response.showMerge}}
+									{{answer.showMerge}}
 								</button> -->
 
-								<form ng-show="response.type==='inlinecode'">
+								<form ng-show="answer.type==='inlinecode'">
 									<label>
-								    <input type="radio" ng-model="values" ng-click="helperVersion(response)" value="helper">
+								    <input type="radio" ng-model="values" ng-click="helperVersion(answer)" value="helper">
 								    View helper's code response
 								  </label><br/>
 								  <label>
-								    <input type="radio" ng-model="values" ng-click="myVersion(response)" value="my">
+								    <input type="radio" ng-model="values" ng-click="myVersion(answer)" value="my">
 								    View my current code
 								  </label><br/>
 								  <label>
-								    <input type="radio" ng-model="values" ng-click="githubVersion(response)" value="both">
+								    <input type="radio" ng-model="values" ng-click="githubVersion(answer)" value="both">
 								    Show github like code difference
 								  </label><br/>
 							 </form>
 
 								<!-- <button class="btn response-button" ng-show="response.type==='inlinecode'" ng-click="merge(selectedObj)">
+
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 									Merge
 								</button> -->
 
 								<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
 								 ng-style="{'background' : bgColor }">
-									<div class='response' ng-repeat="response in helper_response.response" ng-show="response.type" ng-if="response.type!='livewriting_logs'">
+									<div class='response' ng-repeat="answer in helper_response.answers" ng-show="answer.type" ng-if="answer.type!='livewriting_logs'">
 									</div>
 								</div>
 							</div>
@@ -151,7 +156,7 @@
 						<hr>
 						<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
 							<div class='col-sm-12'>
-								{{iterationRequest.response}} -- (from {{iterationRequest.sender}} <strong am-time-ago="iterationRequest.timestamp"></strong>)
+								{{iterationRequest.sender}} : {{iterationRequest.value}} (<span am-time-ago="iterationRequest.timestamp"></span>)
 							</div>
 						</div>
 <!--
