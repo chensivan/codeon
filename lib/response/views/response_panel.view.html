@@ -75,15 +75,16 @@
 								<div ng-show='answer.type!=="livewriting_logs" && answer.type!=="inlinecode"' class='response-type'>
 									Answer Type : {{answer.type}}
 								</div>
-								<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"' class='response-type'>
+								<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"  && answer.isChanged' class='response-type'>
 									Answer Type :{{answer.type}} in {{mySplit(answer)}}
 								</div>
 
 								<div ng-show='(answer.type!="livewriting_logs") && (answer.type!="inlinecode")&& (answer.type!="voice")' class='response-content'>
-								Answer : 	{{answer.value}}
-							</div>
-								<a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")  ' class='response-content'>
-									Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="isVoicePlaying">Click to stop. </a>
+									Answer : 	{{answer.value}}
+								</div>
+
+								<a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
+									Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="(answer.type==='voice') && (isVoicePlaying)">Click to stop. </a>
 
 								<p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p>
 								<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer)">Show me!</button>
@@ -93,7 +94,7 @@
 									{{answer.showMerge}}
 								</button> -->
 
-								<form ng-show="answer.type==='inlinecode'">
+								<form ng-show="answer.type==='inlinecode' && answer.isChanged">
 									<label>
 								    <input type="radio" ng-model="values" ng-click="helperVersion(answer)" value="helper">
 								    View helper's code response
