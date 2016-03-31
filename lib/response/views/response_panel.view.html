@@ -87,33 +87,39 @@
 									Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="(answer.type==='voice') && (isVoicePlaying)">Click to stop. </a>
 
 								<p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p>
-								<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer)">Show me!</button>
+
+								<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button>
 
 								<!-- <button class = "btn btn-default"  ng-show="answer.type==='inlinecode'" ng-click="inlineCodeResponse(answer)">
 									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
 									{{answer.showMerge}}
 								</button> -->
 
-								<form ng-show="answer.type==='inlinecode' && answer.isChanged">
+								<form ng-init="values=current" ng-show="answer.type==='inlinecode' && answer.isChanged && (!answer.removeButton)">
 									<label>
 								    <input type="radio" ng-model="values" ng-click="helperVersion(answer)" value="helper">
-								    View helper's code response
+								    Merge to code to helper version
 								  </label><br/>
 								  <label>
 								    <input type="radio" ng-model="values" ng-click="myVersion(answer)" value="my">
-								    View my current code
+								    Merge the code to my version
 								  </label><br/>
 								  <label>
 								    <input type="radio" ng-model="values" ng-click="githubVersion(answer)" value="both">
 								    Show github like code difference
 								  </label><br/>
-							 </form>
+									<label>
+										<input type="radio" ng-model="values" ng-click="myCurrentCode(answer)" value="current" ng-checked="true">
+								    Show my current code
+								  </label><br/>
 
-								<!-- <button class="btn response-button" ng-show="response.type==='inlinecode'" ng-click="merge(selectedObj)">
+									<button class="btn response-button" ng-show="!answer.removeButton" ng-click="merge(answer, selectedObj)">
+										<span class="icon icon-git-merge"></span>
+										Accept answer
+									</button>
 
-									<span ng-hide="location === 'responseList'" class="icon icon-git-merge"></span>
-									Merge
-								</button> -->
+							  </form>
+
 
 								<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
 								 ng-style="{'background' : bgColor }">
