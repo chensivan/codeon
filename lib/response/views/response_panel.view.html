@@ -80,7 +80,7 @@
 								</div>
 
 								<div ng-show='(answer.type!="livewriting_logs") && (answer.type!="inlinecode")&& (answer.type!="voice")' class='response-content'>
-									Answer : 	{{answer.value}}
+									Answer : 	{{answer.value}} <p ng-show='answer.type==="annotation"'>(helper selected the highlighted text)</p>
 								</div>
 
 								<a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
