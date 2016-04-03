@@ -8,7 +8,7 @@
 	<div class="content-wrapper" >
 		<div ng-show="resList" class="request-list">
 			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-			 <h4>{{ request.title | limitTo: 20 }}{{request.title.length > 20 ? '...' : ''}} </h4>
+			 <h4>{{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h4>
 					<div>
 						<span class='state'>({{request.notification}})</span>
 						<span am-time-ago="request.updated"/>
