@@ -68,104 +68,105 @@
 						<!-- <span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span> -->
 				</div>
 
-					<h6 ng-show="selectedObj.status.responses==0">(Currently there is no response)</h6>
-					<!-- details of one response  -->
-					<ul class="nav nav-pills nav-stacked response-pills">
-					  <li ng-show="(selectedObj.activated&& selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index">
-							<div ng-click = "toggle(selectedObj.status.responses.length-$index-1)" class="annotation_bubble_upper response-pill">
-								<span ng-class = "(selectedObj.activated?'icon icon-mail-reply':'icon icon-diff-renamed')"/> Response {{selectedObj.status.responses.length-$index}}
+				<h6 ng-show="selectedObj.status.responses==0">(Currently there is no response)</h6>
+				<!-- details of one response  -->
+				<ul class="nav nav-pills nav-stacked response-pills">
+				  <li ng-show="(selectedObj.activated&& selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index">
+						<div ng-click = "toggle(selectedObj.status.responses.length-$index-1)" class="annotation_bubble_upper response-pill">
+							<span ng-class = "(selectedObj.activated?'icon icon-mail-reply':'icon icon-diff-renamed')"/> Response {{selectedObj.status.responses.length-$index}}
+						</div>
+						<div class="annotation_bubble_lower">
+							<div style="text-align:right;">
+								(received <span am-time-ago="helper_response.timestamp"></span>)
 							</div>
-							<div class="annotation_bubble_lower">
-								<div style="text-align:right;">
-									(received <span am-time-ago="helper_response.timestamp"></span>)
-								</div>
-								<div ng-show="helper_response.show">
-									<!-- display each answer in the response -->
-									<div ng-repeat="answer in helper_response.answers" ng-show="answer.type">
-										<div ng-show='answer.type!=="livewriting_logs" && answer.type!=="inlinecode"' class='response-type'>
-											{{answer.type}}
-										</div>
-										<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"  && answer.isChanged' class='response-type'>
-											{{answer.type}} in {{mySplit(answer)}}
-										</div>
-
-										<div ng-show='(answer.type!="livewriting_logs") && (answer.type!="inlinecode")&& (answer.type!="voice")' class='response-content'>
-											{{answer.value}} <p ng-show='answer.type==="annotation"'>(helper selected the highlighted text)</p>
-										</div>
-
-										<a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
-											Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="(answer.type==='voice') && (isVoicePlaying)">Click to stop. </a>
-
-										<p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p>
-
-										<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button>
-
-
-
-										<form ng-init="values=current" ng-show="answer.type==='inlinecode' && answer.isChanged && (!answer.removeButton)">
-											<label>
-												<input type="radio" ng-model="values" ng-click="helperVersion(answer)" value="helper">
-												Merge to code to helper version
-											</label><br/>
-											<label>
-												<input type="radio" ng-model="values" ng-click="myVersion(answer)" value="my">
-												Merge the code to my version
-											</label><br/>
-											<label>
-												<input type="radio" ng-model="values" ng-click="githubVersion(answer)" value="both">
-												Show github like code difference
-											</label><br/>
-											<label>
-												<input type="radio" ng-model="values" ng-click="myCurrentCode(answer)" value="current" ng-checked="true">
-												Show my current code
-											</label><br/>
-
-											<button class="btn response-button" ng-show="!answer.removeButton" ng-click="merge(answer, selectedObj)">
-												<span class="icon icon-git-merge"></span>
-												Accept answer
-											</button>
-
-										</form>
-
-
-										<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
-										 ng-style="{'background' : bgColor }">
-											<div class='response' ng-repeat="answer in helper_response.answers" ng-show="answer.type" ng-if="answer.type!='livewriting_logs'">
-											</div>
-										</div>
+							<div ng-show="helper_response.show">
+								<!-- display each answer in the response -->
+								<div ng-repeat="answer in helper_response.answers" ng-show="answer.type">
+									<div ng-show='answer.type!=="livewriting_logs" && answer.type!=="inlinecode"' class='response-type'>
+										{{answer.type}}
+									</div>
+									<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"  && answer.isChanged' class='response-type'>
+										{{answer.type}} in {{mySplit(answer)}}
 									</div>
 
-									<!-- accept, reject and replay buttons -->
-									<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response)">
-										<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
-										Code Replay
-									</button>
-									<!-- replay feature -->
+									<div ng-show='(answer.type!="livewriting_logs") && (answer.type!="inlinecode")&& (answer.type!="voice")' class='response-content'>
+										{{answer.value}} <p ng-show='answer.type==="annotation"'>(helper selected the highlighted text)</p>
+									</div>
 
+									<a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
+										Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="(answer.type==='voice') && (isVoicePlaying)">Click to stop. </a>
+
+									<p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p>
+
+									<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button>
+
+
+
+									<form ng-init="values=current" ng-show="answer.type==='inlinecode' && answer.isChanged && (!answer.removeButton)">
+										<label>
+											<input type="radio" ng-model="values" ng-click="helperVersion(answer)" value="helper">
+											Merge to code to helper version
+										</label><br/>
+										<label>
+											<input type="radio" ng-model="values" ng-click="myVersion(answer)" value="my">
+											Merge the code to my version
+										</label><br/>
+										<label>
+											<input type="radio" ng-model="values" ng-click="githubVersion(answer)" value="both">
+											Show github like code difference
+										</label><br/>
+										<label>
+											<input type="radio" ng-model="values" ng-click="myCurrentCode(answer)" value="current" ng-checked="true">
+											Show my current code
+										</label><br/>
+
+										<button class="btn response-button" ng-show="!answer.removeButton" ng-click="merge(answer, selectedObj)">
+											<span class="icon icon-git-merge"></span>
+											Accept answer
+										</button>
+
+									</form>
+
+
+									<div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
+									 ng-style="{'background' : bgColor }">
+										<div class='response' ng-repeat="answer in helper_response.answers" ng-show="answer.type" ng-if="answer.type!='livewriting_logs'">
+										</div>
+									</div>
 								</div>
 
-							</div>
-						</li>
-					</ul>
-					</div>
+								<!-- accept, reject and replay buttons -->
+								<button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response)">
+									<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
+									Code Replay
+								</button>
+								<!-- replay feature -->
 
-
-					<div class="chat-box">
-						<input type="checkbox" ng-model="chatbox_open"/>
-						<label data-expanded="Close Discussion" data-collapsed="Open Discussion"></label>
-						<div class="chat-box-content">
-							<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
-								<div class='col-sm-12'>
-								{{iterationRequest.sender}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
-								</div>
-							</div>
+						  </div>
 
 						</div>
+					</li>
+				</ul>
 
-						<div class = "chat-box-input">
-							<input type="text" ng-keyup="$event.keyCode == 13 && iterate(iterationMsg) " ng-model="iterationMsg" class="form-control native-key-bindings" tabIndex = -1  ui-keypress="{13:'iterate(iterationMsg)'}" tabIndex = -1  placeholder = "Discuss with your helper!"/>
+
+
+				<div class="chat-box">
+					<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
+					<label data-expanded="Close Discussion" data-collapsed="Open Discussion"></label>
+					<div class="chat-box-content">
+						<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
+							<div class='col-sm-12'>
+							{{iterationRequest.sender}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
+							</div>
 						</div>
+
 					</div>
+
+					<div class = "chat-box-input">
+						<input type="text" ng-keyup="$event.which ===13 && iterate(iterationMsg)"  ng-model="iterationMsg"  ui-keypress="{13:'iterate(iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
+					</div>
+
+				</div>
 				<!--	<div class='discussion'>
 
 						<h2>Comments/Feedback from helpers:</h2>
