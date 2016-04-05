@@ -71,7 +71,7 @@
 				<h6 ng-show="selectedObj.status.responses==0">(Currently there is no response)</h6>
 				<!-- details of one response  -->
 				<ul class="nav nav-pills nav-stacked response-pills">
-				  <li ng-show="(selectedObj.activated&& selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index">
+				  <li ng-show="(selectedObj.activated && selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index">
 						<div ng-click = "toggle(selectedObj.status.responses.length-$index-1)" class="annotation_bubble_upper response-pill">
 							<span ng-class = "(selectedObj.activated?'icon icon-mail-reply':'icon icon-diff-renamed')"/> Response {{selectedObj.status.responses.length-$index}}
 						</div>
