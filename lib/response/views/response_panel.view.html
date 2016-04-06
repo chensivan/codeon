@@ -8,7 +8,8 @@
 	<div class="content-wrapper" >
 		<div ng-show="resList" class="request-list">
 			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-			 <h4>{{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h4>
+			 <!-- <h4>{{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h4> -->
+			 <h3>Transcription: {{request.transcription | limitTo: 10}}{{request.transcription.length > 10 ? '...' : ''}} </h3>
 					<div>
 						<span class='state'>({{request.notification}})</span>
 						<span am-time-ago="request.updated"/>
@@ -36,8 +37,8 @@
 				<div class='request-info request-item'>
 
 					<div class = "annotation_bubble_upper">
-						<edit-in-place clazz ="request-title" aftersave="editTitle2()" value="selectedObj.title" placeholder="Click to edit the title" type = "input" name = "title" label = ""> Click to edit title.</edit-in-place>
-						<div style="text-align:right;">
+						<!-- <edit-in-place clazz ="request-title" aftersave="editTitle2()" value="selectedObj.title" placeholder="Click to edit the title" type = "input" name = "title" label = ""> Click to edit title.</edit-in-place> -->
+						<div style="text-align:left;">
 							<button class = "btn btn-default" ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
 								<span ng-if="!selectedObj.playing">
 									<span class="icon icon-triangle-right"></span>Play Request
@@ -55,7 +56,7 @@
 					<button class = "btn btn-default" ng-show="selectedObj.editTitle" ng-click="changeTitle(inputs.editedTitle, selectedObj)">Done</button>
 					<button class = "btn btn-default" ng-show="selectedObj.editTitle" ng-click="cancelTitle(selectedObj)">Cancel</button> -->
 					<div class='transcript annotation_bubble_lower'>
-						<div><strong>Google Transcription (Click to edit.)</strong></div>
+						<div><strong>Google Transcription</strong></div>
 						<edit-in-place aftersave = "editTranscript2()" value="selectedObj.transcript" placeholder="Click to edit the transcript" type = "textarea" name = "transcript" onblur ="editTranscript(selectedObj)"></edit-in-place>
 					</div>
 
@@ -71,21 +72,25 @@
 				<h6 ng-show="selectedObj.status.responses==0">(Currently there is no response)</h6>
 				<!-- details of one response  -->
 				<ul class="nav nav-pills nav-stacked response-pills">
-				  <li ng-show="(selectedObj.activated && selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index">
+
+					<!-- <li ng-show="(selectedObj.activated && selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index"> -->
+					<li ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index">
 						<div ng-click = "toggle(selectedObj.status.responses.length-$index-1)" class="annotation_bubble_upper response-pill">
-							<span ng-class = "(selectedObj.activated?'icon icon-mail-reply':'icon icon-diff-renamed')"/> Response {{selectedObj.status.responses.length-$index}}
+							<span ng-class = "(selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show?'icon icon-mail-reply':'icon icon-diff-renamed')"/> Response {{selectedObj.status.responses.length-$index}}
 						</div>
+
 						<div class="annotation_bubble_lower">
 							<div style="text-align:right;">
 								(received <span am-time-ago="helper_response.timestamp"></span>)
 							</div>
+
 							<div ng-show="helper_response.show">
 								<!-- display each answer in the response -->
 								<div ng-repeat="answer in helper_response.answers" ng-show="answer.type">
 									<div ng-show='answer.type!=="livewriting_logs" && answer.type!=="inlinecode"' class='response-type'>
 										{{answer.type}}
 									</div>
-									<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"  && answer.isChanged' class='response-type'>
+									<div ng-show='answer.type!=="livewriting_logs" && answer.type==="inlinecode"  && answer.isChanged && (!answer.removeButton)' class='response-type'>
 										{{answer.type}} in {{mySplit(answer)}}
 									</div>
 
@@ -99,8 +104,6 @@
 									<p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p>
 
 									<button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button>
-
-
 
 									<form ng-init="values=current" ng-show="answer.type==='inlinecode' && answer.isChanged && (!answer.removeButton)">
 										<label>
