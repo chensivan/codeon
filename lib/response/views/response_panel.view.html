@@ -154,7 +154,7 @@
 
 
 				<div class="chat-box">
-					<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
+					<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true" tabindex="-1"></input>
 					<label data-expanded="Close Discussion" data-collapsed="Open Discussion"></label>
 					<div class="chat-box-content">
 						<div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
@@ -166,7 +166,7 @@
 					</div>
 
 					<div class = "chat-box-input">
-						<input type="text" ng-keyup="$event.which ===13 && iterate(iterationMsg)"  ng-model="iterationMsg"  ui-keypress="{13:'iterate(iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
+						<input type="text" class='native-key-bindings' ng-keyup="$event.which ===13 && iterate(iterationMsg)"  ng-model="iterationMsg"  ui-keypress="{13:'iterate(iterationMsg)'}" rows="1" placeholder = "Discuss with your helper!" tabindex="-1"></input>
 					</div>
 
 				</div>
