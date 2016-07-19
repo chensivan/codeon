@@ -20,6 +20,18 @@ atom-text-editor::shadow .line {
   &.nothingchanged {
     //background-color: rgba(0,0,0,0.2);
   }
+
+}
+
+atom-text-editor::shadow .line-number {
+  &.request{
+    background-color:  #FA54BD;
+
+    &:hover {
+     cursor: pointer;
+   }
+  }
+
 }
 
 //
@@ -66,6 +78,35 @@ atom-text-editor::shadow .line {
 
    &:hover {
     opacity: 1;
+   }
+   &::before, &::after {
+     position: absolute;
+     left: 6px;
+     content: ' ';
+     height: 15px;
+     width: 3px;
+     background-color: #FFF;
+   }
+   &::before {
+     transform: rotate(45deg);
+   }
+   &::after {
+     transform: rotate(-45deg);
+   }
+ }
+
+ .requestbuttonclose {
+   position: absolute;
+   right: 5px;
+   top: 5px;
+   width: 40px;
+   height: 40px;
+   opacity: 0.5;
+   transition: opacity 100ms;
+
+   &:hover {
+    opacity: 1;
+    cursor: pointer;
    }
    &::before, &::after {
      position: absolute;
