@@ -27,7 +27,7 @@
     "fs-plus": "latest",
     "highlight.js": "latest",
     "jquery": "latest",
-    "jquery-ui": "latest",
+    "jquery-ui": "1.10.5",
     "jsonfile": "latest",
     "less": "latest",
     "marked": "latest",
