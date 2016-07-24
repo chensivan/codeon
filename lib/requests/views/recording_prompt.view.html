@@ -1,5 +1,4 @@
 
-<script src="../services/gumadapter.js"></script>
 <div ng-controller='RequestPromptController' class='code-on-request-prompt'>
     <form ng-submit='startRecording()' ng-hide='COUNTDOWN'>
         <h2>Briefly name your request. (e.g. javascript event handler syntax)</h2>
@@ -12,6 +11,6 @@
     </form>
 
   <div ng-show = "COUNTDOWN" class = "big_countdown">
-  	<span class = "in_red">{{COUNTDOWN_NUMBER}}</span>
+  	<span class = "in_red">Recording starts in {{COUNTDOWN_NUMBER}}s</span>
   </div>
 </div>

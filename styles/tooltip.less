@@ -34,6 +34,72 @@ atom-text-editor::shadow .line-number {
 
 }
 
+
+.request-button {
+    margin-right: 0 !important;
+    height: 0; // Height is computed
+    // right: 0;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    z-index: 100;
+
+    transition: opacity 100ms, visibility 0 100ms;
+
+    backface-visibility: hidden;
+
+    div {
+      color:black;
+      padding: 14px;
+      font-size: 18px;
+      background-color: white;
+    }
+
+    &.is--open {
+      margin-right: 0 !important;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+      transition: opacity 100ms;
+    }
+
+}
+
+.request-button .request-button-wrapper {
+
+ background-color: #444;
+ box-shadow: 0px 0px 5px 0px #222;
+ padding: 5px;
+ border-radius: 6px;
+
+ .requestbuttonclose {
+   position: absolute;
+   top: -2px;
+   width: 40px;
+   height: 15px;
+   opacity: 0.5;
+   transition: opacity 100ms;
+   font-size: 12px;
+
+   &:hover {
+    opacity: 1;
+    cursor: pointer;
+   }
+   &::before, &::after {
+     position: absolute;
+     left: 6px;
+     height: 15px;
+     width: 3px;
+     background-color: #FFF;
+
+   }
+
+ }
+}
+
+
 //
 // atom-text-editor /deep/ .line.add{
 //  background-color: green;
@@ -94,40 +160,14 @@ atom-text-editor::shadow .line-number {
      transform: rotate(-45deg);
    }
  }
-
- .requestbuttonclose {
-   position: absolute;
-   right: 5px;
-   top: 5px;
-   width: 40px;
-   height: 40px;
-   opacity: 0.5;
-   transition: opacity 100ms;
-
-   &:hover {
-    opacity: 1;
-    cursor: pointer;
-   }
-   &::before, &::after {
-     position: absolute;
-     left: 6px;
-     content: ' ';
-     height: 15px;
-     width: 3px;
-     background-color: #FFF;
-   }
-   &::before {
-     transform: rotate(45deg);
-   }
-   &::after {
-     transform: rotate(-45deg);
-   }
- }
 }
+
+
 
 .test-pkg {
 
  height: 0; // Height is computed
+ // right: 0;
  position: absolute;
  visibility: hidden;
  opacity: 0;
@@ -151,7 +191,7 @@ atom-text-editor::shadow .line-number {
    visibility: visible;
    opacity: 1;
    pointer-events: all;
-
+  //  right: 0 !important;
    transition: opacity 100ms;
  }
 }

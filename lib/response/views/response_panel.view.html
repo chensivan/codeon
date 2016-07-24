@@ -123,6 +123,7 @@
 									<div ng-show='answer.type==="explanation"' class='response-content'>
 										{{answer.value}}
 									</div>
+								</div>
 
 									<!-- <a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
 										Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="(answer.type==='voice') && (isVoicePlaying)">Click to stop. </a> -->
@@ -132,7 +133,8 @@
 									<!-- <button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button> -->
 
 									<!-- <form ng-show="answer.type==='inlinecode' && answer.type==='annotation' && answer.isChanged && (!answer.removeButton)"> -->
-									<form ng-show="answer.type==='inlinecode' || answer.type==='annotation'">
+								<div ng-repeat='answer in helper_response.answers | showButtonOnce'>
+									<form >
 										<div class="btn-group" data-toggle="buttons">
 											<label class="btn btn-default">
 												<input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="helper" type="radio">Helper
@@ -191,7 +193,7 @@
 
 
 
-				<div class="chat-box">
+				<!-- <div class="chat-box">
 					<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
 					<label data-expanded="Close Discussion (click to close)" data-collapsed="Open Discussion (click to open)"></label>
 					<div class="chat-box-content">
@@ -207,7 +209,8 @@
 						<input type="text" ng-keyup="$event.which ===13 && iterate(iterationMsg)"  ng-model="iterationMsg"  ui-keypress="{13:'iterate(iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
 					</div>
 
-				</div>
+				</div> -->
+
 				<!--	<div class='discussion'>
 
 						<h2>Comments/Feedback from helpers:</h2>
