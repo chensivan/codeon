@@ -18,7 +18,7 @@
 				<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
 
 				<div>
-					<span class='state'>Status: {{request.notification}}</span></br>
+					<span class='state'>{{request.notification}}</span></br>
 					asked <span am-time-ago="request.updated"/>
 				</div>
 
@@ -26,7 +26,8 @@
 			 <div ng-show='request.helperCurrentWorking'>
 			 	<img style="display:inline-block" width="20px" height="20px" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" />
 				<p style='color:lime; display:inline-block'>Helper is working</p>
-				<img style="display:inline-block" src="http://forums.getpaint.net/public/style_images/master/ajax_loading.gif" />
+				<img style="display:inline-block" width="45px" height="45px" src="http://www.teleservegroup.com/images/loading_dots.gif" />
+				<!-- old gif http://forums.getpaint.net/public/style_images/master/ajax_loading.gif -->
 			 </div>
 
 		 </br></br></br></br>
@@ -34,17 +35,18 @@
 			 <div class="request-buttons">
 				 <button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
 					 <span ng-if="!request.playing">
-						 Play Request
+						 <span class="icon icon-triangle-right"></span>Play Request
 					 </span>
 					 <span ng-if="request.playing">
-						 Stop
+						 <span class="icon icon-primitive-square"></span>Stop
 					 </span>
 				 </button>
 
-				 <button ng-click="showLocation(request); $event.stopPropagation();" class="btn btn-default">Show location</button>
+				 <button ng-click="showLocation(request); $event.stopPropagation();" class="btn btn-default"><span class="glyphicon glyphicon-play"></span>Show Location</button>
 
 				 <!-- <button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button> -->
 			</div>
+
 			</div>
 		</div>
 
@@ -57,7 +59,7 @@
 
 					<div class = "annotation_bubble_upper">
 						<!-- <edit-in-place clazz ="request-title" aftersave="editTitle2()" value="selectedObj.title" placeholder="Click to edit the title" type = "input" name = "title" label = ""> Click to edit title.</edit-in-place> -->
-						<h3 style="color: white"><b>Title:</b> {{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 35 ? '...' : ''}} </h3>
+						<h3 style="color: black"><b>Title:</b> {{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 35 ? '...' : ''}} </h3>
 
 						<hr>
 						<h3>File: {{selectedObj.changelog[1].title}}</h3>
@@ -65,7 +67,7 @@
 						<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
 
 						<div>
-							<span class='state'>Status: {{selectedObj.notification}}</span></br>
+							<span class='state'>{{selectedObj.notification}}</span></br>
 							asked <span am-time-ago="selectedObj.updated"/>
 						</div>
 
@@ -191,7 +193,21 @@
 					</li>
 				</ul>
 
+				<div style="margin-top:20px;">
+         <div ng-show="comments.length">Comments</div>
+         <hr>
+         <div class="row" ng-repeat="comment in comments track by $index">
+            <div class="col-sm-10 col-md-10"> {{ comment.comt }}dfasdfasd  </div>
+            <div class="col-sm-2 col-md-2" am-time-ago="comment.time"></div>
+            <hr>
+         </div>
 
+
+           <a ng-click="addComment()" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
+           <textarea id="request_comt" ng-model="txtcomment" ng-show="commenting" rows="4"></textarea>
+           <button ng-click="submit()" class="btn btn-success" ng-if="commenting">Submit</button>
+           <button ng-click="cancel()" ng-if="commenting" class="btn btn-warning">Cancel</button>
+         </div>
 
 				<!-- <div class="chat-box">
 					<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
