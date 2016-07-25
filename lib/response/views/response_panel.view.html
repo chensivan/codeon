@@ -52,7 +52,7 @@
 
 			<div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
 
-				<div class='request-info request-item'>
+				<div>
 
 					<div class = "annotation_bubble_upper">
 						<!-- <edit-in-place clazz ="request-title" aftersave="editTitle2()" value="selectedObj.title" placeholder="Click to edit the title" type = "input" name = "title" label = ""> Click to edit title.</edit-in-place> -->
@@ -113,15 +113,15 @@
 
 						<!-- <span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span> -->
 				</div>
-				<br><br>
+
 				<h6 ng-show="selectedObj.status.responses.length==0">(Currently there is no response)</h6>
 				<!-- details of one response  -->
 				<ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
 
 					<!-- <li ng-show="(selectedObj.activated && selectedObj.status.responses[selectedObj.status.responses.length-$index-1].show) || (!selectedObj.activated)"  ng-controller='HelperResponse' class="response"  ng-repeat="helper_response in selectedObj.status.responses.slice().reverse() track by $index"> -->
 					<li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses' ng-if='$last' class="response" >
-						<div class="annotation_bubble_upper response-pill">
-							<span> Answer </span>
+						<div>
+							<h4> Answer </h4>
 						</div>
 
 						<div class="annotation_bubble_lower">
