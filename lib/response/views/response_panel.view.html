@@ -9,16 +9,31 @@
 	<div id='blockList' class="content-wrapper" >
 		<button class = "btn btn-success" ng-show="resList" id="makeRequest" ng-click="newRequest()"><h2>Make a request</h2></button>
 		<div ng-show="resList" class="request-list">
-			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests" id="{{request.id}}" ng-click="clickRequest(request)">
-				<h3 style="color: white"><b>R{{$root.requests.length-$index}} Title:</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
 
-				<hr>
-				<h3>File: {{request.changelog[1].title}}</h3>
+			<div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
+				<h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
+
+				<div class="request-buttons">
+ 				 <button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
+ 					 <span ng-if="!request.playing">
+ 						 <span class="icon icon-triangle-right"></span>
+ 					 </span>
+ 					 <span ng-if="request.playing">
+ 						 <span class="icon icon-primitive-square"></span>
+ 					 </span>
+ 				 </button>
+				 {{request.changelog[1].title}}
+ 				 <!-- <button ng-click="showLocation(request); $event.stopPropagation();" class="btn btn-default">Show location</button> -->
+
+ 				 <!-- <button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button> -->
+ 				</div>
+
+
 				<!-- <h3>Transcription: {{request.transcription | limitTo: 10}}{{request.transcription.length > 10 ? '...' : ''}} </h3> -->
 				<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
 
-				<div>
-					<span class='state'>Status: {{request.notification}}</span></br>
+				<div style='float: right'>
+					<span class='state'>{{request.notification}}</span></br>
 					asked <span am-time-ago="request.updated"/>
 				</div>
 
@@ -29,22 +44,7 @@
 				<img style="display:inline-block" src="http://forums.getpaint.net/public/style_images/master/ajax_loading.gif" />
 			 </div>
 
-		 </br></br></br></br>
-
-			 <div class="request-buttons">
-				 <button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
-					 <span ng-if="!request.playing">
-						 Play Request
-					 </span>
-					 <span ng-if="request.playing">
-						 Stop
-					 </span>
-				 </button>
-
-				 <button ng-click="showLocation(request); $event.stopPropagation();" class="btn btn-default">Show location</button>
-
-				 <!-- <button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button> -->
-			</div>
+			 <br><br>
 			</div>
 		</div>
 
@@ -57,15 +57,15 @@
 
 					<div class = "annotation_bubble_upper">
 						<!-- <edit-in-place clazz ="request-title" aftersave="editTitle2()" value="selectedObj.title" placeholder="Click to edit the title" type = "input" name = "title" label = ""> Click to edit title.</edit-in-place> -->
-						<h3 style="color: white"><b>Title:</b> {{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 35 ? '...' : ''}} </h3>
-
+						<h3 style="color: white">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
+						<h3><span class="icon icon-file" /> {{selectedObj.changelog[1].title}}</h3>
 						<hr>
-						<h3>File: {{selectedObj.changelog[1].title}}</h3>
+
 						<!-- <h3>Transcription: {{request.transcription | limitTo: 10}}{{request.transcription.length > 10 ? '...' : ''}} </h3> -->
 						<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
 
 						<div>
-							<span class='state'>Status: {{selectedObj.notification}}</span></br>
+							<span class='state'>{{selectedObj.notification}}</span></br>
 							asked <span am-time-ago="selectedObj.updated"/>
 						</div>
 
@@ -188,6 +188,9 @@
 						  </div>
 
 						</div>
+
+
+
 					</li>
 				</ul>
 
