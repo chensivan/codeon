@@ -37,14 +37,13 @@
 					asked <span am-time-ago="request.updated"/>
 				</div>
 
-
+			 <br><br>
 			 <div ng-show='request.helperCurrentWorking'>
-			 	<img style="display:inline-block" width="20px" height="20px" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" />
 				<p style='color:lime; display:inline-block'>Helper is working</p>
-				<img style="display:inline-block" src="http://forums.getpaint.net/public/style_images/master/ajax_loading.gif" />
+				<!-- <img style="display:inline-block" width="45px" height="45px" src="http://www.teleservegroup.com/images/loading_dots.gif" /> -->
+				<!-- old gif http://forums.getpaint.net/public/style_images/master/ajax_loading.gif -->
 			 </div>
 
-			 <br><br>
 			</div>
 		</div>
 
@@ -57,18 +56,32 @@
 
 					<div class = "annotation_bubble_upper">
 						<!-- <edit-in-place clazz ="request-title" aftersave="editTitle2()" value="selectedObj.title" placeholder="Click to edit the title" type = "input" name = "title" label = ""> Click to edit title.</edit-in-place> -->
-						<h3 style="color: white">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
-						<h3><span class="icon icon-file" /> {{selectedObj.changelog[1].title}}</h3>
-						<hr>
+						<h3>{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
+
+
+						<div class="request-buttons">
+		 				 <button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
+		 					 <span ng-if="!selectedObj.playing">
+		 						 <span class="icon icon-triangle-right"></span>
+		 					 </span>
+		 					 <span ng-if="selectedObj.playing">
+		 						 <span class="icon icon-primitive-square"></span>
+		 					 </span>
+		 				 </button>
+						 {{selectedObj.changelog[1].title}}
+		 				 <!-- <button ng-click="showLocation(request); $event.stopPropagation();" class="btn btn-default">Show location</button> -->
+
+		 				 <!-- <button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button> -->
+		 				</div>
 
 						<!-- <h3>Transcription: {{request.transcription | limitTo: 10}}{{request.transcription.length > 10 ? '...' : ''}} </h3> -->
 						<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
 
-						<div>
+						<div style='float: right'>
 							<span class='state'>{{selectedObj.notification}}</span></br>
 							asked <span am-time-ago="selectedObj.updated"/>
 						</div>
-
+<!--
 						<div style="text-align:left;">
 							<button class = "btn btn-default" ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
 								<span ng-if="!selectedObj.playing">
@@ -79,7 +92,7 @@
 								</span>
 							</button>
 							<button ng-click="showLocationWithinRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">Show location</button>
-						</div>
+						</div> -->
 					</div>
 					<!-- <input ng-model="inputs.editedTitle" ng-show="selectedObj.editTitle" class = "native-key-bindings form-control" tabindex="-1"></input> -->
 					<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
@@ -194,7 +207,21 @@
 					</li>
 				</ul>
 
+				<div style="margin-top:20px;">
+         <div ng-show="comments.length">Comments</div>
+         <hr>
+         <div class="row" ng-repeat="comment in comments track by $index">
+            <div class="col-sm-9 col-md-9"> {{ comment.comt }} </div>
+            <div class="col-sm-3 col-md-3" am-time-ago="comment.time"></div>
+            <hr>
+         </div>
 
+
+           <a ng-click="addComment()" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
+           <textarea style="display: block" ng-model="$parent.txtcom" ng-show="commenting" cols="50" rows="4"></textarea>
+           <button ng-click="submit()" class="btn btn-success" ng-if="commenting">Submit</button>
+           <button ng-click="cancel()" ng-if="commenting" class="btn btn-warning">Cancel</button>
+         </div>
 
 				<!-- <div class="chat-box">
 					<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
