@@ -197,14 +197,14 @@
          <div ng-show="comments.length">Comments</div>
          <hr>
          <div class="row" ng-repeat="comment in comments track by $index">
-            <div class="col-sm-10 col-md-10"> {{ comment.comt }}dfasdfasd  </div>
-            <div class="col-sm-2 col-md-2" am-time-ago="comment.time"></div>
+            <div class="col-sm-9 col-md-9"> {{ comment.comt }} </div>
+            <div class="col-sm-3 col-md-3" am-time-ago="comment.time"></div>
             <hr>
          </div>
 
 
            <a ng-click="addComment()" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
-           <textarea id="request_comt" ng-model="txtcomment" ng-show="commenting" rows="4"></textarea>
+           <textarea style="display: block" ng-model="$parent.txtcom" ng-show="commenting" cols="50" rows="4"></textarea>
            <button ng-click="submit()" class="btn btn-success" ng-if="commenting">Submit</button>
            <button ng-click="cancel()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
