@@ -89,22 +89,34 @@
             </li>
          </ul>
          <div style="margin-top:20px;">
-            <div ng-show="comments.length">Comments</div>
+            <div ng-show="selectedObj.status.discussion.length">Comments</div>
             <hr>
-            <div class="row" ng-repeat="comment in comments track by $index">
-               <div class="col-sm-9 col-md-9"> {{ comment.comt }} </div>
-               <div class="col-sm-3 col-md-3" am-time-ago="comment.time"></div>
+            <div class="row" ng-repeat="iterationRequest in selectedObj.status.discussion track by $index">
+               <div class="col-sm-9 col-md-9"> {{iterationRequest.sender}} : {{iterationRequest.value}} </div>
+               <div class="col-sm-3 col-md-3" am-time-ago="iterationRequest.timestamp"></div>
                <hr>
             </div>
             <a ng-click="addComment()" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
-            <textarea style="display: block" ng-model="$parent.txtcom" ng-show="commenting" cols="50" rows="4"></textarea>
-            <button ng-click="submit()" class="btn btn-success" ng-if="commenting">Submit</button>
-            <button ng-click="cancel()" ng-if="commenting" class="btn btn-warning">Cancel</button>
+            <textarea style="display: block" ng-model="txtcom" ng-show="commenting" cols="30" rows="4"></textarea>
+            <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
+            <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
       </div>
    </div>
 </div>
+<!--
+    <div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
+      <div class='col-sm-12'>
+      {{iterationRequest.sender}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
+      </div>
+    </div>
 
+
+  <div class = "chat-box-input">
+    <input type="text" ng-keyup="$event.which ===13 && iterate(iterationMsg)"  ng-model="iterationMsg"  ui-keypress="{13:'iterate(iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
+  </div>
+
+</div> -->
 
 <!-- <button ng-click="showLocation(request); $event.stopPropagation();" class="btn btn-default">Show location</button> -->
 <!-- <button class="btn btn-default" ng-show='request.removeButton' ng-click="hideRequest(request); $event.stopPropagation();">Remove</button> -->
