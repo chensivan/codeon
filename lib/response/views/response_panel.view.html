@@ -96,7 +96,7 @@
                <div class="col-sm-3 col-md-3" am-time-ago="iterationRequest.timestamp"></div>
                <hr>
             </div>
-            <a ng-click="addComment()" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
+            <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
             <textarea style="display: block" ng-model="txtcom" ng-show="commenting" cols="30" rows="4"></textarea>
             <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
             <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
