@@ -38,6 +38,7 @@
     "socket.io": "latest",
     "stacktrace-parser": "latest",
     "temp": "latest",
-    "underscore": "latest"
+    "underscore": "latest",
+    "loophole": "latest"
   }
 }
