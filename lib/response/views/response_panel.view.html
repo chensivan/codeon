@@ -96,15 +96,17 @@
             </li>
          </ul>
          <div style="margin-top:20px;">
-            <div ng-show="selectedObj.status.discussion.length">Comments</div>
+            <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
             <hr>
-            <div class="row" ng-repeat="iterationRequest in selectedObj.status.discussion track by $index">
-               <div class="col-sm-9 col-md-9"> {{iterationRequest.sender}} : {{iterationRequest.value}} </div>
-               <div class="col-sm-3 col-md-3" am-time-ago="iterationRequest.timestamp"></div>
-               <hr>
+            <div ng-repeat="iterationRequest in selectedObj.status.discussion track by $index">
+                  <div> {{iterationRequest.sender}} : {{iterationRequest.value}} </div>
+                  <div style="float:right" am-time-ago="iterationRequest.timestamp"></div>
+                  <br>
+                  <div style="border-bottom: solid 1px;"></div>
+                  <!-- <hr style='padding: 0px;'/> -->
             </div>
             <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
-            <textarea style="display: block" ng-model="txtcom" ng-show="commenting" cols="30" rows="4"></textarea>
+            <textarea style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="30" rows="4"></textarea>
             <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
             <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
