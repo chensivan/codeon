@@ -26,6 +26,7 @@
                asked <span am-time-ago="request.updated"/>
             </div>
             <br><br>
+            <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button>
             <div ng-show='request.helperCurrentWorking'>
                <p style='color:lime; display:inline-block'>Helper is working</p>
             </div>
@@ -56,7 +57,7 @@
          <h6 ng-show="selectedObj.status.responses.length==0">(Currently there is no response)</h6>
          <!-- details of one response  -->
          <ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
-            <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses' ng-if='$last' class="response" >
+            <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses track by $index' ng-if='$last' class="response" >
                <div>
                   <h4> Answer </h4>
                </div>
@@ -66,26 +67,32 @@
                   </div>
                   <div>
                      <!-- display each answer in the response -->
-                     <div ng-repeat='answer in helper_response.answers'>
+                     <div ng-repeat='answer in helper_response.answers track by $index'>
                         <!-- Show explanation content -->
                         <div ng-show='answer.type==="explanation"' class='response-content'>
                            {{answer.value}}
                         </div>
                      </div>
-                     <div ng-repeat='answer in helper_response.answers | showButtonOnce'>
+                     <div ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
                         <form >
                            <div class="btn-group" data-toggle="buttons">
                               <label class="btn btn-default">
-                              <input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="helper" type="radio">Helper
+                              <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">Code Diff
                               </label>
                               <label class="btn btn-default">
-                              <input ng-model="values" ng-click="finalMergeVersion(answer)" value="2013" type="radio">Merge
+                              <input ng-model="values" ng-click="openNewTabShowHelperCode(answer)" value="2013" type="radio">Helper
                               </label>
                            </div>
                         </form>
+                        <span class="addedline">Added</span> <span class="deletedline">Deleted</span> <span class="commentline">Comment</span>
                      </div>
+
                   </div>
+
                </div>
+               <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='openNewTabShowHelperCode(helper_response.answers)'>Merge</button>
+               <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
+
             </li>
          </ul>
          <div style="margin-top:20px;">
@@ -101,6 +108,8 @@
             <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
             <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
+         <button ng-click='runCurrentOpenTabCode()'>Run the code</button>
+         <div id='runningEnvironment'>{{consoleResult}}</div>
       </div>
    </div>
 </div>
