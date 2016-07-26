@@ -21,11 +21,11 @@
                </button>
                {{request.changelog[1].title}}
             </div>
-            <div style='float: right'>
+            <div style='float: right;margin-top:-28px;'>
                <span class='state'>{{request.notification}}</span></br>
                asked <span am-time-ago="request.updated"/>
             </div>
-            <br><br>
+            <br>
             <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button>
             <div ng-show='request.helperCurrentWorking'>
                <p style='color:lime; display:inline-block'>Helper is working</p>
@@ -48,7 +48,7 @@
                   </button>
                   {{selectedObj.changelog[1].title}}
                 </div>
-                <div style='float: right'>
+                <div style='float: right;margin-top:-28px;'>
                   <span class='state'>{{selectedObj.notification}}</span></br>
                   asked <span am-time-ago="selectedObj.updated"/>
                </div>
@@ -84,7 +84,9 @@
                               </label>
                            </div>
                         </form>
-                        <span class="addedline">Added</span> <span class="deletedline">Deleted</span> <span class="commentline">Comment</span>
+                        <div ng-show="legend">
+                          <span class="addedline">Added</span> <span class="deletedline">Deleted</span> <span class="commentline">Comment</span>
+                        </div>
                      </div>
 
                   </div>
@@ -109,8 +111,8 @@
             <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
             <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
-         <button ng-click='runCurrentOpenTabCode()'>Run the code</button>
-         <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;" id='runningEnvironment'>{{consoleResult}}</div>
+         <!-- <button style="margin-top: 20px;" ng-click='runCurrentOpenTabCode()'>Run the code</button>
+         <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;margin-bottom: 20px;" id='runningEnvironment'>{{consoleResult}}</div> -->
       </div>
    </div>
 </div>
