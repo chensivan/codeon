@@ -36,7 +36,7 @@
          </div>
       </div>
       <!-- inside each request -->
-      <div ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
+      <div style="background-color: #fafafa;" ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
          <div>
             <div class = "annotation_bubble_upper">
                <h3>{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
@@ -116,7 +116,7 @@
             <div style="display:block;" ng-show="commenting">
               <br>
             </div>
-            <textarea style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="57" rows="4"></textarea>
+            <textarea style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
             <div style="display:block;" ng-show="commenting">
               <br>
             </div>
