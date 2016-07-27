@@ -7,7 +7,7 @@
       <button class = "btn btn-success" ng-show="resList" id="makeRequest" ng-click="newRequest()">
          <h2>Make a request</h2>
       </button>
-      <button ng-click='runCode()'>Run this code</button>
+      <!-- <button ng-click='runCode()'>Run this code</button> -->
       <div ng-show="resList" class="request-list">
          <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
             <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
@@ -85,8 +85,11 @@
                               </label>
                            </div>
                         </form>
-                        <div ng-show="legend">
-                          <span class="addedline">Added</span> <span class="deletedline">Deleted</span> <span class="commentline">Comment</span>
+                        <div ng-show="codeDiffLegend">
+                          <span class="addedline">Added</span> <span class="deletedline">Deleted</span>
+                        </div>
+                        <div ng-show="codeCommentLegend">
+                          <span class="commentline">Comment</span>
                         </div>
                      </div>
 
