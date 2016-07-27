@@ -5,7 +5,7 @@
    </h1>
    <div id='blockList' class="content-wrapper" >
       <button class = "btn btn-success" ng-show="resList" id="makeRequest" ng-click="newRequest()">
-         <h2>Make a request</h2>
+         <h2>Ask for help</h2>
       </button>
 
       <button ng-click='runCode()'>Run this code</button>
@@ -29,7 +29,7 @@
                asked <span am-time-ago="request.updated"/>
             </div>
             <br>
-            <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button>
+            <!-- <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button> -->
             <div ng-show='request.helperCurrentWorking'>
                <p style='color:lime; display:inline-block'>Helper is working</p>
             </div>
@@ -80,7 +80,7 @@
                         <form >
                            <div class="btn-group" data-toggle="buttons">
                               <label class="btn btn-default">
-                              <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">Code Diff
+                              <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">{{codeDiffButtonName}}
                               </label>
                               <label class="btn btn-default">
                               <input ng-model="values" ng-click="openNewTabShowHelperCode(answer)" value="2013" type="radio">Helper
@@ -116,7 +116,7 @@
             <div style="display:block;" ng-show="commenting">
               <br>
             </div>
-            <textarea style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
+            <textarea class="native-key-bindings" style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
             <div style="display:block;" ng-show="commenting">
               <br>
             </div>
