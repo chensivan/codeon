@@ -14,7 +14,7 @@
       'label': 'Codeon'
       'submenu': [
         {
-          'label': 'Make a Request'
+          'label': 'Ask for help'
           'command': 'atom-codeon:toggle-recording'
         },
         {
