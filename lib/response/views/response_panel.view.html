@@ -7,6 +7,7 @@
       <button class = "btn btn-success" ng-show="resList" id="makeRequest" ng-click="newRequest()">
          <h2>Make a request</h2>
       </button>
+      <button ng-click='runCode()'>Run this code</button>
       <div ng-show="resList" class="request-list">
          <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
             <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
@@ -107,7 +108,13 @@
                   <!-- <hr style='padding: 0px;'/> -->
             </div>
             <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
-            <textarea style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="30" rows="4"></textarea>
+            <div style="display:block;" ng-show="commenting">
+              <br>
+            </div>
+            <textarea style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="57" rows="4"></textarea>
+            <div style="display:block;" ng-show="commenting">
+              <br>
+            </div>
             <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
             <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
