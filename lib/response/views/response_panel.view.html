@@ -7,9 +7,6 @@
       <button class = "btn btn-success" ng-show="resList" id="makeRequest" ng-click="newRequest()">
          <h2>Make a request</h2>
       </button>
-
-      <button ng-click='runCode()'>Run this code</button>
-
       <div ng-show="resList" class="request-list">
          <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
             <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
@@ -83,12 +80,15 @@
                               <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">Code Diff
                               </label>
                               <label class="btn btn-default">
-                              <input ng-model="values" ng-click="openNewTabShowHelperCode(answer)" value="2013" type="radio">Helper
+                              <input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="2013" type="radio">Helper
                               </label>
                            </div>
                         </form>
                         <div ng-show="codeDiffLegend">
-                          <span class="addedline">Added</span> <span class="deletedline">Deleted</span>
+                          <span class="addedline">Added</span>
+                        </div>
+                        <div ng-show="codeDiffLegend">
+                          <span class="deletedline">Deleted</span>
                         </div>
                         <div ng-show="codeCommentLegend">
                           <span class="commentline">Comment</span>
