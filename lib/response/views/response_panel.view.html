@@ -77,7 +77,7 @@
                         <form >
                            <div class="btn-group" data-toggle="buttons">
                               <label class="btn btn-default">
-                              <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">{{codeDiffButtonName}}
+                              <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">Code Diff
                               </label>
                               <label class="btn btn-default">
                               <input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="2013" type="radio">Helper
@@ -99,7 +99,7 @@
 
                </div>
                <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
-               <button style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='openNewTabShowHelperCode(helper_response.answers)'>Merge</button>
+               <button ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
             </li>
          </ul>
          <div style="margin-top:20px;">
