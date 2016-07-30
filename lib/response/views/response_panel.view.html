@@ -30,6 +30,12 @@
             <div ng-show='request.helperCurrentWorking'>
                <p style='color:#F90101; font-size: 20px; display:inline-block'>Helper is working</p>
             </div>
+            <div ng-show='request.helperIsDone'>
+               <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a response</p>
+            </div>
+            <div ng-show='request.helperHasMsg'>
+               <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a comment</p>
+            </div>
          </div>
       </div>
       <!-- inside each request -->
