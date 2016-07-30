@@ -34,9 +34,9 @@
       </div>
       <!-- inside each request -->
       <div style="background-color: #fafafa;" ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
-         <div>
+         <div style="margin-left: 10px; margin-right: 10px; ">
             <div class = "annotation_bubble_upper">
-               <h3>{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
+               <h3 style="font-size: 18px;">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
                <div class="request-buttons">
                   <button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
                   <span ng-if="!selectedObj.playing">
@@ -54,17 +54,19 @@
                </div>
             </div>
          </div>
+         <hr>
          <h6 ng-show="selectedObj.status.responses.length==0">(Currently there is no response)</h6>
          <!-- details of one response  -->
          <ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
             <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses track by $index' ng-if='$last' class="response" >
                <div>
                   <h4> Answer </h4>
+                  <div style="text-align:right; font-size:11px">
+                      <span am-time-ago="helper_response.timestamp"></span>
+                  </div>
                </div>
                <div class="annotation_bubble_lower">
-                  <div style="text-align:right;">
-                     (received <span am-time-ago="helper_response.timestamp"></span>)
-                  </div>
+
                   <div>
                      <!-- display each answer in the response -->
                      <div ng-repeat='answer in helper_response.answers track by $index'>
@@ -102,14 +104,18 @@
                <button ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
             </li>
          </ul>
-         <div style="margin-top:20px;">
-            <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
-            <hr>
+         <hr>
+         <div style=" margin-left: 10px; margin-right: 10px;">
+            <!-- <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
+            <hr> -->
             <div ng-repeat="iterationRequest in selectedObj.status.discussion track by $index">
-                  <div> {{iterationRequest.sender}} : {{iterationRequest.value}} </div>
-                  <div style="float:right" am-time-ago="iterationRequest.timestamp"></div>
+              <div ng-style=" (iterationRequest.sender=='Helper') && {'background-color': '#D4F6F7'} ||
+                              (iterationRequest.sender=='Requester') && {'background-color': '#A6FF50'} ">
+                  <div style='font-size:16px;'> {{iterationRequest.sender}} : {{iterationRequest.value}} </div>
+                  <div style="float:right; font-size:11px;" am-time-ago="iterationRequest.timestamp"></div>
                   <br>
                   <div style="border-bottom: solid 1px;"></div>
+                </div>
                   <!-- <hr style='padding: 0px;'/> -->
             </div>
             <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
