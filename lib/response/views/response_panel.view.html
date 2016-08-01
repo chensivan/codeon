@@ -61,15 +61,12 @@
             </div>
          </div>
          <hr>
-         <h6 ng-show="selectedObj.status.responses.length==0">(Currently there is no response)</h6>
+         <h6 style="margin-left:10px; font-size:15px" ng-show="selectedObj.status.responses.length==0">No response yet!</h6>
          <!-- details of one response  -->
          <ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
             <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses track by $index' ng-if='$last' class="response" >
                <div>
                   <h4> Answer </h4>
-                  <div style="text-align:right; font-size:11px">
-                      <span am-time-ago="helper_response.timestamp"></span>
-                  </div>
                </div>
                <div class="annotation_bubble_lower">
 
@@ -82,32 +79,36 @@
                         </div>
                      </div>
                      <div ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
-                        <form >
-                           <div class="btn-group" data-toggle="buttons">
-                              <label class="btn btn-default">
-                              <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">Code Diff
-                              </label>
-                              <label class="btn btn-default">
-                              <input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="2013" type="radio">Helper
-                              </label>
-                           </div>
-                        </form>
-                        <div ng-show="codeDiffLegend">
-                          <span class="addedline">Added</span>
-                        </div>
-                        <div ng-show="codeDiffLegend">
-                          <span class="deletedline">Deleted</span>
-                        </div>
-                        <div ng-show="codeCommentLegend">
-                          <span class="commentline">Comment</span>
-                        </div>
+
+                       <div ng-show="codeDiffLegend">
+                         Code difference between yours and helpers with two legends
+                         <span class="addedline">Helper Added</span> and
+                         <span class="deletedline">Helper Deleted</span> (You may close helper code w/o saving it.)
+                       </div>
+                       <div ng-show="codeCommentLegend">
+                         Helper's code with a legend
+                         <span class="commentline">Comment</span> (You may close helper code w/o saving it.)
+                       </div>
+                       <div style="text-align:right; font-size:11px">
+                           <span am-time-ago="helper_response.timestamp"></span>
+                       </div>
+                       <form style="margin-top:25px;">
+                         <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                            <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">{{codeDiffButtonName}}
+                            </label>
+                            <!-- <label class="btn btn-default">
+                            <input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="2013" type="radio">Helper
+                            </label> -->
+                         </div>
+                       </form>
                      </div>
 
                   </div>
 
                </div>
                <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
-               <button ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
+               <button ng-hide='mergedAlready' ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
             </li>
          </ul>
          <hr>
