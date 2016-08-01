@@ -69,7 +69,6 @@
                   <h4> Answer </h4>
                </div>
                <div class="annotation_bubble_lower">
-
                   <div>
                      <!-- display each answer in the response -->
                      <div ng-repeat='answer in helper_response.answers track by $index'>
@@ -103,9 +102,7 @@
                          </div>
                        </form>
                      </div>
-
                   </div>
-
                </div>
                <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
                <button ng-hide='mergedAlready' ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
