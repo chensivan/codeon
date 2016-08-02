@@ -78,20 +78,19 @@
                         </div>
                      </div>
                      <div ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
-
                        <div ng-show="codeDiffLegend">
-                         Code difference between yours and helpers with two legends
+                         Code difference between yours and helpers is on the right column with two legends
                          <span class="addedline">Helper Added</span> and
                          <span class="deletedline">Helper Deleted</span> (You may close helper code w/o saving it.)
                        </div>
                        <div ng-show="codeCommentLegend">
-                         Helper's code with a legend
+                         Helper's code is on the right column with a legend
                          <span class="commentline">Comment</span> (You may close helper code w/o saving it.)
                        </div>
                        <div style="text-align:right; font-size:11px">
-                           <span am-time-ago="helper_response.timestamp"></span>
+                         <span am-time-ago="helper_response.timestamp"></span>
                        </div>
-                       <form style="margin-top:25px;">
+                       <form ng-hide='noInlineCode' style="margin-top:25px;">
                          <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default">
                             <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">{{codeDiffButtonName}}
