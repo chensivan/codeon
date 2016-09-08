@@ -66,7 +66,11 @@
          <ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
             <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses track by $index' ng-if='$last' class="response" >
                <div>
-                  <h4> Answer </h4>
+                  <h4> Answer
+                    <img class='answerInfo' ng-show='codeCommentLegend' src="atom://atom-codeon/resources/info.png" style="width: 20px;" title="Helper's code is on the right column with comments in yellow. (You may close helper code w/o saving it)">
+                    <img class='answerInfo' ng-show='codeDiffLegend' src="atom://atom-codeon/resources/info.png" style="width: 20px;" title="Code difference between yours and helpers is on the right column. Addition in green and deletion in red. (You may close helper code w/o saving it)">
+
+                  </h4>
                </div>
                <div class="annotation_bubble_lower">
                   <div>
@@ -77,17 +81,16 @@
                            {{answer.value}}
                         </div>
                      </div>
-                     <div ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
-                       <div ng-show="codeDiffLegend">
-                         Code difference between yours and helpers is on the right column with two legends
-                         <span class="addedline">Helper Added</span> and
-                         <span class="deletedline">Helper Deleted</span> (You may close helper code w/o saving it.)
-                       </div>
+                     <div style='margin: 5px' ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
+
                        <div ng-show="codeCommentLegend">
-                         Helper's code is on the right column with a legend
-                         <span class="commentline">Comment</span> (You may close helper code w/o saving it.)
+                         <!-- Helper's code is on the right column with a legend
+                         <span class="commentline">Comment</span> (You may close helper code w/o saving it.) -->
                        </div>
                        <div style="text-align:right; font-size:11px">
+                         <div style='float: left; color:red' ng-show="codeDiffLegend">
+                           (Please only run Helper Code version.)
+                         </div>
                          <span am-time-ago="helper_response.timestamp"></span>
                        </div>
                        <form ng-hide='noInlineCode' style="margin-top:25px;">
@@ -111,26 +114,31 @@
          <div style=" margin-left: 10px; margin-right: 10px;">
             <!-- <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
             <hr> -->
-            <div ng-repeat="iterationRequest in selectedObj.status.discussion track by $index">
-              <div ng-style=" (iterationRequest.sender=='Helper') && {'background-color': '#D4F6F7'} ||
-                              (iterationRequest.sender=='Requester') && {'background-color': '#A6FF50'} ">
-                  <div style='font-size:16px;'> {{iterationRequest.sender}} : {{iterationRequest.value}} </div>
-                  <div style="float:right; font-size:11px;" am-time-ago="iterationRequest.timestamp"></div>
-                  <br>
-                  <div style="border-bottom: solid 1px;"></div>
-                </div>
-                  <!-- <hr style='padding: 0px;'/> -->
+            <div>
+              <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
+              <div style="display:block;" ng-show="commenting">
+                <br>
+              </div>
+              <textarea class="native-key-bindings" style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
+              <div style="display:block;" ng-show="commenting">
+                <br>
+              </div>
+              <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
+              <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
             </div>
-            <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
-            <div style="display:block;" ng-show="commenting">
-              <br>
+
+            <div style='height: 200px; overflow-y: scroll'>
+              <div ng-repeat="iterationRequest in selectedObj.status.discussion.slice().reverse() track by $index ">
+                <div ng-style=" (iterationRequest.sender=='Helper') && {'background-color': '#D4F6F7'} ||
+                                (iterationRequest.sender=='Requester') && {'background-color': '#A6FF50'} ">
+                    <div style='font-size:16px;'> {{iterationRequest.sender}} : {{iterationRequest.value}}</div>
+                    <div style="float:right; font-size:11px;" am-time-ago="iterationRequest.timestamp"></div>
+                    <br>
+                    <div style="border-bottom: solid 1px;"></div>
+                  </div>
+                    <!-- <hr style='padding: 0px;'/> -->
+              </div>
             </div>
-            <textarea class="native-key-bindings" style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
-            <div style="display:block;" ng-show="commenting">
-              <br>
-            </div>
-            <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
-            <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
          </div>
          <!-- <button style="margin-top: 20px;" ng-click='runCurrentOpenTabCode()'>Run the code</button>
          <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;margin-bottom: 20px;" id='runningEnvironment'>{{consoleResult}}</div> -->

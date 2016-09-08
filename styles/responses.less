@@ -20,17 +20,33 @@
 
 @transition-duration: 250ms;
 @transition-widget-duration: 100ms;
-@resizer-width: 8px;
+@resizer-width: 30px;
 
 
 .zi-width-resizer {
+	margin-left: -30px;
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
 	width: @resizer-width;
 	cursor: col-resize;
 	z-index: 5;
-  border-right: 8px solid @base-border-color;
+  border-right: 30px solid @base-border-color;
+}
+.zi-resizable{
+	margin-left: 25px;
+}
+.zi-button-expand{
+	position: absolute;
+	font-size: 18px;
+	top: 50%;
+	height: 30px;
+	width: 106px;
+	border-radius: 18px;
+	background-color: #41BB5A;
+	transform: rotate(270deg);
+	color:white;
+	transform-origin: left top 0;
 }
 .zi-mainview {
     background-color: @app-background-color;
@@ -190,6 +206,7 @@
       border-radius: @component-border-radius;
     }
 }
+
 
 // livewriting style
 
