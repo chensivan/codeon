@@ -1,149 +1,147 @@
 <div id="theList" ng-controller='ResponsePanelController' class="codeon_panel wrapper">
-   <h1 class="title" ng-click="titleClick(title)">
+    <h1 class="title" ng-click="titleClick(title)">
       <span ng-show="selectedObj && responseContent" class="mega-icon icon-chevron-left"></span>
       <span class="title-text">{{selectedObj.request || title}} </span>
    </h1>
-   <div id='blockList' class="content-wrapper" >
-      <button class = "btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
+    <div id='blockList' class="content-wrapper">
+        <button class="btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
          <h2>Ask for help</h2>
       </button>
-      <div ng-show="resList" class="request-list">
-         <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd = "'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
-            <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
-            <div class="request-buttons">
-               <button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
+        <div ng-show="resList" class="request-list">
+            <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd="'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
+                <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
+                <div class="request-buttons">
+                    <button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
                <span ng-if="!request.playing">
                <span class="icon icon-triangle-right"></span>
                </span>
                <span ng-if="request.playing">
                <span class="icon icon-primitive-square"></span>
                </span>
-               </button>
-               {{request.changelog[1].title}}
+               </button> {{request.changelog[1].title}}
+                </div>
+                <div style='float: right;margin-top:-28px;'>
+                    <span class='state'>{{request.notification}}</span></br>
+                    asked <span am-time-ago="request.updated" />
+                </div>
+                <br>
+                <!-- <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button> -->
+                <div ng-show='request.helperCurrentWorking'>
+                    <p style='color:#F90101; font-size: 20px; display:inline-block'>Helper is working</p>
+                </div>
+                <div ng-show='request.helperIsDone'>
+                    <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a response</p>
+                </div>
+                <div ng-show='request.helperHasMsg'>
+                    <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a comment</p>
+                </div>
             </div>
-            <div style='float: right;margin-top:-28px;'>
-               <span class='state'>{{request.notification}}</span></br>
-               asked <span am-time-ago="request.updated"/>
-            </div>
-            <br>
-            <!-- <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button> -->
-            <div ng-show='request.helperCurrentWorking'>
-               <p style='color:#F90101; font-size: 20px; display:inline-block'>Helper is working</p>
-            </div>
-            <div ng-show='request.helperIsDone'>
-               <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a response</p>
-            </div>
-            <div ng-show='request.helperHasMsg'>
-               <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a comment</p>
-            </div>
-         </div>
-      </div>
-      <!-- inside each request -->
-      <div style="background-color: #fafafa;" ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
-         <div style="margin-left: 10px; margin-right: 10px; ">
-            <div class = "annotation_bubble_upper">
-               <h3 style="font-size: 18px;">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
-               <div class="request-buttons">
-                  <button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
+        </div>
+        <!-- inside each request -->
+        <div style="background-color: #fafafa;" ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
+            <div style="margin-left: 10px; margin-right: 10px; ">
+                <div class="annotation_bubble_upper">
+                    <h3 style="font-size: 18px;">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
+                    <div class="request-buttons">
+                        <button ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
                   <span ng-if="!selectedObj.playing">
                   <span class="icon icon-triangle-right"></span>
                   </span>
                   <span ng-if="selectedObj.playing">
                   <span class="icon icon-primitive-square"></span>
                   </span>
-                  </button>
-                  {{selectedObj.changelog[1].title}}
+                  </button> {{selectedObj.changelog[1].title}}
+                    </div>
+                    <div style='float: right;margin-top:-28px;'>
+                        <span class='state'>{{selectedObj.notification}}</span></br>
+                        asked <span am-time-ago="selectedObj.updated" />
+                    </div>
                 </div>
-                <div style='float: right;margin-top:-28px;'>
-                  <span class='state'>{{selectedObj.notification}}</span></br>
-                  asked <span am-time-ago="selectedObj.updated"/>
-               </div>
             </div>
-         </div>
-         <hr>
-         <h6 style="margin-left:10px; font-size:15px" ng-show="selectedObj.status.responses.length==0">No response yet!</h6>
-         <!-- details of one response  -->
-         <ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
-            <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses track by $index' ng-if='$last' class="response" >
-               <div>
-                  <h4> Answer
+            <hr>
+            <h6 style="margin-left:10px; font-size:15px" ng-show="selectedObj.status.responses.length==0">No response yet!</h6>
+            <!-- details of one response  -->
+            <ul class="nav nav-pills nav-stacked response-pills" ng-show="selectedObj.status.responses.length!=0">
+                <li ng-controller='HelperResponse' ng-show="selectedObj.status.responses.length!=0" ng-repeat='helper_response in  selectedObj.status.responses track by $index' ng-if='$last' class="response">
+                    <div>
+                        <h4> Answer
                     <img class='answerInfo' ng-show='codeCommentLegend' src="atom://atom-codeon/resources/info.png" style="width: 20px;" title="Helper's code is on the right column with comments in yellow. (You may close helper code w/o saving it)">
                     <img class='answerInfo' ng-show='codeDiffLegend' src="atom://atom-codeon/resources/info.png" style="width: 20px;" title="Code difference between yours and helpers is on the right column. Addition in green and deletion in red. (You may close helper code w/o saving it)">
 
                   </h4>
-               </div>
-               <div class="annotation_bubble_lower">
-                  <div>
-                     <!-- display each answer in the response -->
-                     <div ng-repeat='answer in helper_response.answers track by $index'>
-                        <!-- Show explanation content -->
-                        <div ng-show='answer.type==="explanation"' class='response-content'>
-                           {{answer.value}}
-                        </div>
-                     </div>
-                     <div style='margin: 5px' ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
+                    </div>
+                    <div class="annotation_bubble_lower">
+                        <div>
+                            <!-- display each answer in the response -->
+                            <div ng-repeat='answer in helper_response.answers track by $index'>
+                                <!-- Show explanation content -->
+                                <div ng-show='answer.type==="explanation"' class='response-content'>
+                                    {{answer.value}}
+                                </div>
+                            </div>
+                            <div style='margin: 5px' ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
 
-                       <div ng-show="codeCommentLegend">
-                         <!-- Helper's code is on the right column with a legend
+                                <div ng-show="codeCommentLegend">
+                                    <!-- Helper's code is on the right column with a legend
                          <span class="commentline">Comment</span> (You may close helper code w/o saving it.) -->
-                       </div>
-                       <div style="text-align:right; font-size:11px">
-                         <div style='float: left; color:red' ng-show="codeDiffLegend">
-                           (Please only run Helper Code version.)
-                         </div>
-                         <span am-time-ago="helper_response.timestamp"></span>
-                       </div>
-                       <form ng-hide='noInlineCode' style="margin-top:25px;">
-                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default">
+                                </div>
+                                <div style="text-align:right; font-size:11px">
+                                    <div style='float: left; color:red' ng-show="codeDiffLegend">
+                                        (Please only run Helper Code version.)
+                                    </div>
+                                    <span am-time-ago="helper_response.timestamp"></span>
+                                </div>
+                                <form ng-hide='noInlineCode' style="margin-top:25px;">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default">
                             <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">{{codeDiffButtonName}}
                             </label>
-                            <!-- <label class="btn btn-default">
+                                        <!-- <label class="btn btn-default">
                             <input ng-model="values" ng-click="openNewTabShowHelperCode(helper_response.answers)" value="2013" type="radio">Helper
                             </label> -->
-                         </div>
-                       </form>
-                     </div>
-                  </div>
-               </div>
-               <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
-               <button ng-hide='mergedAlready' ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
-            </li>
-         </ul>
-         <hr>
-         <div style=" margin-left: 10px; margin-right: 10px;">
-            <!-- <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
+                    <button ng-hide='mergedAlready' ng-repeat='answer in helper_response.answers | showMergeButton track by $index' style='margin-top: 15px; float: right; margin-right: 10px;' class="btn btn-success" ng-click='finalMergeVersion(answer)'>Merge</button>
+                </li>
+            </ul>
+            <hr>
+            <div style=" margin-left: 10px; margin-right: 10px;">
+                <!-- <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
             <hr> -->
-            <div>
-              <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
-              <div style="display:block;" ng-show="commenting">
-                <br>
-              </div>
-              <textarea class="native-key-bindings" style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
-              <div style="display:block;" ng-show="commenting">
-                <br>
-              </div>
-              <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
-              <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
-            </div>
+                <div>
+                    <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
+                    <div style="display:block;" ng-show="commenting">
+                        <br>
+                    </div>
+                    <textarea class="native-key-bindings" style="display: block; resize: none;" ng-model="txtcom" ng-show="commenting" cols="49" rows="4"></textarea>
+                    <div style="display:block;" ng-show="commenting">
+                        <br>
+                    </div>
+                    <button ng-click="submitComment(txtcom)" class="btn btn-success" ng-if="commenting">Submit</button>
+                    <button ng-click="cancelComment()" ng-if="commenting" class="btn btn-warning">Cancel</button>
+                </div>
 
-            <div style='height: 200px; overflow-y: scroll'>
-              <div ng-repeat="iterationRequest in selectedObj.status.discussion.slice().reverse() track by $index ">
-                <div ng-style=" (iterationRequest.sender=='Helper') && {'background-color': '#D4F6F7'} ||
+                <div style='height: 200px; overflow-y: scroll'>
+                    <div ng-repeat="iterationRequest in selectedObj.status.discussion.slice().reverse() track by $index ">
+                        <div ng-style=" (iterationRequest.sender=='Helper') && {'background-color': '#D4F6F7'} ||
                                 (iterationRequest.sender=='Requester') && {'background-color': '#A6FF50'} ">
-                    <div style='font-size:16px;'> {{iterationRequest.sender}} : {{iterationRequest.value}}</div>
-                    <div style="float:right; font-size:11px;" am-time-ago="iterationRequest.timestamp"></div>
-                    <br>
-                    <div style="border-bottom: solid 1px;"></div>
-                  </div>
-                    <!-- <hr style='padding: 0px;'/> -->
-              </div>
+                            <div style='font-size:16px;'> {{iterationRequest.sender}} : {{iterationRequest.value}}</div>
+                            <div style="float:right; font-size:11px;" am-time-ago="iterationRequest.timestamp"></div>
+                            <br>
+                            <div style="border-bottom: solid 1px;"></div>
+                        </div>
+                        <!-- <hr style='padding: 0px;'/> -->
+                    </div>
+                </div>
             </div>
-         </div>
-         <!-- <button style="margin-top: 20px;" ng-click='runCurrentOpenTabCode()'>Run the code</button>
+            <!-- <button style="margin-top: 20px;" ng-click='runCurrentOpenTabCode()'>Run the code</button>
          <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;margin-bottom: 20px;" id='runningEnvironment'>{{consoleResult}}</div> -->
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
 <!--
     <div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
@@ -174,8 +172,8 @@
 <!-- old gif http://forums.getpaint.net/public/style_images/master/ajax_loading.gif -->
 
 
-				<!-- <h3>Transcription: {{request.transcription | limitTo: 10}}{{request.transcription.length > 10 ? '...' : ''}} </h3> -->
-				<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
+<!-- <h3>Transcription: {{request.transcription | limitTo: 10}}{{request.transcription.length > 10 ? '...' : ''}} </h3> -->
+<!-- <h3>Title: {{ (request.title.length>0?request.title:'Click to edit the title')| limitTo: 25 }}{{request.title.length > 25 ? '...' : ''}} </h3> -->
 
 
 
@@ -196,21 +194,21 @@
 	<edit-in-place aftersave = "editTranscript2()" value="selectedObj.transcript" placeholder="Click to edit the transcript" type = "textarea" name = "transcript" onblur ="editTranscript(selectedObj)"></edit-in-place>
 </div> -->
 
-	<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
+<!-- <textarea type="text" ng-model="inputs.iterationMsg" /> -->
 <!--		<button class = "btn btn-default" ng-hide="selectedObj.edit" ng-click="editRequest(selectedObj)">Edit Transcript</button>
 	<button class = "btn btn-default" ng-show="selectedObj.edit" ng-click="changeRequest(inputs.editedRequest, selectedObj)" ng-disabled="!inputs.editedRequest">Done</button>
 	<button class = "btn btn-default" ng-show="selectedObj.edit" ng-click="cancelRequest(selectedObj)">Cancel</button>
 -->
 
-	<!-- <span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span> -->
+<!-- <span ng-class='"status " + selectedObj.status.state'>({{selectedObj.notification}})</span> -->
 
 
 
 
-									<!-- <form > -->
-										<!-- <label><input type="radio" ng-model="values" ng-click="githubVersion(answer)" value="both" />Show github like code difference</label> -->
+<!-- <form > -->
+<!-- <label><input type="radio" ng-model="values" ng-click="githubVersion(answer)" value="both" />Show github like code difference</label> -->
 
-										<!-- <br/>
+<!-- <br/>
 										<label><input type="radio" ng-model="values" ng-click="helperVersion(answer)" value="helper" />Helper code</label>
 
 										<br/>
@@ -220,45 +218,45 @@
 										<br/> -->
 
 
-										<!-- <button class="btn response-button" ng-show="!answer.removeButton" ng-click="merge(answer, selectedObj)">
+<!-- <button class="btn response-button" ng-show="!answer.removeButton" ng-click="merge(answer, selectedObj)">
 											<span class="icon icon-git-merge" uib-tooltip='Click this button to notify helper that you accept his answer.'></span>
 											Accept answer
 										</button> -->
 
 
 
-										<!-- <a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
+<!-- <a href="#" ng-click = 'playVoice(answer)' ng-show='(answer.type==="voice")' class='response-content'>
 											Click to play voice annotation {{answer.id}} </a><a href="#" ng-click = 'playVoice(answer)' ng-show="(answer.type==='voice') && (isVoicePlaying)">Click to stop. </a> -->
 
-										<!-- <p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p> -->
+<!-- <p ng-class='"merge"' ng-show='answer.mergeConflict'>There is a merge conflict with this answer. Please resolve it by yourself!</p> -->
 
-										<!-- <button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button> -->
+<!-- <button class = "btn btn-default"  ng-show="answer.type==='annotation'" ng-click="annotationResponse(answer,helper_response.answers)">{{answer.showTip}}</button> -->
 
-										<!-- <form ng-show="answer.type==='inlinecode' && answer.type==='annotation' && answer.isChanged && (!answer.removeButton)"> -->
-
-
+<!-- <form ng-show="answer.type==='inlinecode' && answer.type==='annotation' && answer.isChanged && (!answer.removeButton)"> -->
 
 
-									<!-- </form> -->
 
 
-														<!-- accept, reject and replay buttons -->
-														<!-- <button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response)">
+<!-- </form> -->
+
+
+<!-- accept, reject and replay buttons -->
+<!-- <button class="btn response-button" ng-show="hasReplay" ng-click="replay(helper_response)">
 															<span ng-hide="location === 'responseList'" class="icon icon-triangle-right"></span>
 															Code Replay
 														</button> -->
-														<!-- replay feature -->
+<!-- replay feature -->
 
 
 
-									<!-- <div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
+<!-- <div  class="sub-response" ng-repeat="helper_response in selectedObj.status.responses"
 									 ng-style="{'background' : bgColor }">
 										<div class='response' ng-repeat="answer in helper_response.answers" ng-show="answer.type" ng-if="answer.type!='livewriting_logs'">
 										</div>
 									</div> -->
 
 
-									<!--	<div class='discussion'>
+<!--	<div class='discussion'>
 
 											<h2>Comments/Feedback from helpers:</h2>
 											<hr>
@@ -268,14 +266,14 @@
 												</div>
 											</div>
 											-->
-					<!--
+<!--
 											<button class="btn response-button" ng-show="selectedObj" ng-click="nah()">
 												<span ng-hide="location === 'responseList'" class="icon icon-comment-discussion"></span>
 												Comment
 											</button>
 
 											<!-- reject action -->
-					<!--
+<!--
 											<div class="reject-controls">
 												<textarea ng-model="iterationMsg" class="form-control native-key-bindings" rows="1" tabIndex = -1  placeholder = "Respond to helper's comment..."/>
 												<br />
@@ -288,7 +286,7 @@
 
 
 
-					<!--
+<!--
 											<div style="text-align:left;">
 												<button class = "btn btn-default" ng-click="playRequest(selectedObj); $event.stopPropagation();" class="btn btn-default">
 													<span ng-if="!selectedObj.playing">
@@ -302,7 +300,7 @@
 											</div> -->
 
 
-									<!-- <div class="chat-box">
+<!-- <div class="chat-box">
 										<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
 										<label data-expanded="Close Discussion (click to close)" data-collapsed="Open Discussion (click to open)"></label>
 										<div class="chat-box-content">
