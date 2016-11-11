@@ -11,7 +11,7 @@ aloud within the context of the Atom IDE.
 ## Getting started
 
 To start using Codeon you will first need to take care of some
-prerequisites to then install the plugin. Below there is a guide that
+prerequisites to install the plugin. Below there is a guide that
 will take you through the requirements for Codeon the installation
 process.
 
