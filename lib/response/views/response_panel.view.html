@@ -154,7 +154,7 @@
                   </div>
                 </div>
               </div>
-              <button style="color: gray" >Add</button>
+              <button style="color: gray" ng-click='captureContext()'>Add</button>
               <div class = "chat-box-input native-key-bindings">
                 <input type="text" ng-keyup="$event.which ===13 && iterate($parent.iterationMsg)"  ng-model="$parent.iterationMsg"  ui-keypress="{13:'iterate($parent.iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
               </div>
