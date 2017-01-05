@@ -6,7 +6,8 @@
     <div id='blockList' class="content-wrapper">
         <button class="btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
          <h2>Ask for help</h2>
-      </button>
+        </button>
+        <!-- requests list -->
         <div ng-show="resList" class="request-list">
             <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd="'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
                 <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}} </h3>
@@ -139,8 +140,30 @@
                 </div>
             </div>
             <!-- <button style="margin-top: 20px;" ng-click='runCurrentOpenTabCode()'>Run the code</button>
-         <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;margin-bottom: 20px;" id='runningEnvironment'>{{consoleResult}}</div> -->
+            <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;margin-bottom: 20px;" id='runningEnvironment'>{{consoleResult}}</div> -->
+
+            <div class="chat-box" >
+              <input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
+              <label data-expanded="Close Discussion (click to close!)" data-collapsed="Open Discussion (click to open)"></label>
+              <div class="chat-box-content">
+                <div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
+                  <div class='col-sm-12'>
+                  {{iterationRequest.sender}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
+                  <button style="color: gray" ng-click='showContext(iterationRequest.value)'>+</button>
+
+                  </div>
+                </div>
+              </div>
+              <button style="color: gray" >Add</button>
+              <div class = "chat-box-input">
+                <input type="text" ng-keyup="$event.which ===13 && iterate($parent.iterationMsg)"  ng-model="$parent.iterationMsg"  ui-keypress="{13:'iterate($parent.iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
+              </div>
+            </div>
         </div>
+
+        <!-- chat box -->
+
+
     </div>
 </div>
 <!--
@@ -300,7 +323,7 @@
 											</div> -->
 
 
-<!-- <div class="chat-box">
+                    <!-- <div class="chat-box">
 										<input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
 										<label data-expanded="Close Discussion (click to close)" data-collapsed="Open Discussion (click to open)"></label>
 										<div class="chat-box-content">
