@@ -1,6 +1,6 @@
 <div id="theList" ng-controller='ResponsePanelController' class="codeon_panel wrapper">
     <h1 class="title" ng-click="titleClick(title)">
-      <span ng-show="selectedObj && responseContent" class="mega-icon icon-chevron-left"></span>
+      <span ng-show="selectedObj && responseContent" style='width: 30px; height: 30px' class="mega-icon icon-chevron-left"></span>
       <span class="title-text">{{selectedObj.request || title}} </span>
    </h1>
     <div id='blockList' class="content-wrapper">
@@ -154,7 +154,7 @@
                   </div>
                 </div>
               </div>
-              <button style="color: gray" ng-click='captureContext()'>Add</button>
+              <button style="color: gray" ng-click='captureContext()'>+</button>
               <div class = "chat-box-input native-key-bindings">
                 <form ng-submit="inputSubmit()" >
                   <input type="text" ng-keyup="$event.which ===13 && iterate($parent.iterationMsg)"  ng-model="$parent.iterationMsg" ui-keypress="{13:'iterate($parent.iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
