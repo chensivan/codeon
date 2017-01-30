@@ -154,12 +154,12 @@
                 <div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
                   <div class='col-sm-12'>
                   {{iterationRequest.sender}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
-                  <button style="color: gray" ng-click='showContext(iterationRequest.value)'>+</button>
+                  <!-- <button style="color: gray" ng-click='showContext(iterationRequest.value)'>+</button> -->
 
                   </div>
                 </div>
               </div>
-              <button style="color: gray" ng-click='captureContext()'>+</button>
+              <!-- <button style="color: gray" ng-click='captureContext()'>+</button> -->
               <div class = "chat-box-input native-key-bindings">
                 <form ng-submit="inputSubmit()" >
                   <input type="text" ng-keyup="$event.which ===13 && iterate($parent.iterationMsg)"  ng-model="$parent.iterationMsg" ui-keypress="{13:'iterate($parent.iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
