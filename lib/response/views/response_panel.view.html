@@ -111,9 +111,10 @@
                 </li>
             </ul>
             <hr>
-            <div style=" margin-left: 10px; margin-right: 10px;">
-                <!-- <strong><div style="font-size:16px;" ng-show="selectedObj.status.discussion.length">Comments</div></strong>
-            <hr> -->
+
+            <!-- add comments starts -->
+            <!-- <div style=" margin-left: 10px; margin-right: 10px;">
+
                 <div>
                     <a ng-click="addComment(); $event.stopPropagation();" ng-show="!commenting" style="color:#6b7b7d; cursor: pointer;">add a comment</a>
                     <div style="display:block;" ng-show="commenting">
@@ -136,13 +137,16 @@
                             <br>
                             <div style="border-bottom: solid 1px;"></div>
                         </div>
-                        <!-- <hr style='padding: 0px;'/> -->
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- add comments ends -->
+
+
             <!-- <button style="margin-top: 20px;" ng-click='runCurrentOpenTabCode()'>Run the code</button>
             <div style="height:200px;border-style:solid; border-width:1px;overflow-y: scroll;margin-bottom: 20px;" id='runningEnvironment'>{{consoleResult}}</div> -->
 
+            <!-- chat box starts -->
             <div class="chat-box" >
               <input type="checkbox" ng-model="chatbox_open" ng-init="chatbox_open=true"/>
               <label data-expanded="Close Discussion (click to close!)" data-collapsed="Open Discussion (click to open)"></label>
@@ -162,9 +166,10 @@
                 </form>
               </div>
             </div>
+            <!-- chat box ends -->
+
         </div>
 
-        <!-- chat box -->
 
 
     </div>
