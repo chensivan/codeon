@@ -8,9 +8,31 @@
       <button class="btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
          <h2>Ask for help</h2>
       </button>
+      <button class="btn" ng-show="reqSideBarButton" id="makeRequest" ng-click="search.toggle()">
+        <h2>Search</h2>
+      </button>
+      <div class="row" ng-show="search.active">
+        <div class="col-sm-11">
+          <hr>
+        </div>
+        <div class="col-sm-11">
+          <div class="input-group">
+            <span class="input-group-addon">Search:</span></span>
+            <input type="text" class="form-control native-key-bindings" ng-model="search.query.title">
+          </div>
+        </div>
+        <div class="col-sm-11">
+          <span class="label" ng-repeat="tag in tags.all" ng-class="tags.active == tag ?'label-success':'label-default'">
+            <a href="" ng-click="tags.update(tag)">{{tag.name}}</a>
+          </span>
+        </div>
+        <div class="col-sm-11">
+          <hr>
+        </div>
+      </div>
       <!-- requests list -->
       <div ng-show="resList" class="request-list">
-         <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd="'odd'" ng-repeat="request in requests track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
+         <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd="'odd'" ng-repeat="request in requests | filter:tags.active.filter | filter:search.query track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
             <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}}</h3>
             <h3 ng-show='request.request_description'>Q: {{request.request_description}}</h3>
             File:{{request.changelog[1].title}}
