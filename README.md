@@ -11,7 +11,7 @@ aloud within the context of the Atom IDE.
 ## Getting started
 
 To start using Codeon you will first need to take care of some
-prerequisites to then install the plugin. Below there is a guide that
+prerequisites to install the plugin. Below there is a guide that
 will take you through the requirements for Codeon the installation
 process.
 
@@ -149,6 +149,13 @@ Atom’s packages directory so that it loads using the latest version
 of the code. This can be done with the following command:
 
     $ ln -s /path/to/this/repo ~>/.atom/packages/atom-codeon
+
+If this doesn't work, try to make the link by giving the full path to
+each directory, for example:
+
+    $ ln -s C:/Users/path/to/repo C:/Users/User/.atom/packages
+    
+Changing the paths as needed.
 
 Alternatively, you can make a symbolic link to the standard installation
 by switching the locations in the previous command.
