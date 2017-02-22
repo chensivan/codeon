@@ -1,3 +1,4 @@
+
 <div ng-controller='RequestPromptController' class='code-on-request-prompt'>
   <form ng-submit='startRecording()' ng-hide='COUNTDOWN'>
     <h2>Briefly name your request. (e.g. javascript event handler syntax)</h2>
@@ -10,7 +11,7 @@
     <h2 ng-hide='TEXTMODE' style="color:red;">Please keep your request within 1 minute.</h2>
     <br/>
     <h2 ng-show='TEXTMODE' >Describe your request in the text box below. Click 'Submit' button once you are done! (up to 50 words)</h2>
-    
+
     <textarea ng-show='TEXTMODE' ng-model='textRequestDescription' id="request-text" class="form-control native-key-bindings" rows="5" tabIndex=-1 placeholder="(e.g. type your request here ... )">{{requestText}}</textarea>
 
     <div ng-hide="COUNTDOWN" class="prompt_buttons">
