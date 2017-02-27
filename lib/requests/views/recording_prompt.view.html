@@ -15,6 +15,7 @@
     <textarea ng-show='TEXTMODE' ng-model='textRequestDescription' id="request-text" class="form-control native-key-bindings" rows="5" tabIndex=-1 placeholder="(e.g. type your request here ... )">{{requestText}}</textarea>
 
     <div ng-hide="COUNTDOWN" class="prompt_buttons">
+      <select ng-model="requestTags" ng-options="tag for tag in tags" multiple></select>
       <button id='textRecording' ng-hide='TEXTMODE' type='button' class='btn btn-default icon settings h3_size' ng-click='textRecording()'>Text</button>
       <button id='startRecording' ng-hide='TEXTMODE' type='button' class='btn btn-default icon icon-primitive-dot settings h3_size' ng-click='startRecording()'>Start Recording</button>
       <button id='requestTextSubmittion' ng-show='TEXTMODE' type='button' class='btn btn-default icon settings h3_size' ng-click='textRequestSubmittion()'>Submit</button>

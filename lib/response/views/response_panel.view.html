@@ -22,8 +22,8 @@
           </div>
         </div>
         <div class="col-sm-11">
-          <span class="label" ng-repeat="tag in tags.all" ng-class="tags.active == tag ?'label-success':'label-default'">
-            <a href="" ng-click="tags.update(tag)">{{tag.name}}</a>
+          <span class="label" ng-repeat="tag in tags" ng-class="activeTag == tag ?'label-success':'label-default'">
+            <a href="" ng-click="updateTag(tag)">{{tag.name}}</a>
           </span>
         </div>
         <div class="col-sm-11">
@@ -32,8 +32,13 @@
       </div>
       <!-- requests list -->
       <div ng-show="resList" class="request-list">
-         <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd="'odd'" ng-repeat="request in requests | filter:tags.active.filter | filter:search.query track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
-            <h3><b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}}</h3>
+         <div ng-hide='request.remove' ng-class='request.status.state' class="request-item" ng-class-odd="'odd'" ng-repeat="request in requests | filter:activeTag.filter | filter:search.query track by $index" id="{{request.id}}" ng-click="clickRequest(request)" ng-style="setColor($index)">
+            <h3>
+              <b>R{{$root.requests.length-$index}}</b> {{request.title | limitTo:45}}{{request.title.length > 45 ? '...' : ''}}
+            </h3>
+            <div>
+              <span class="label label-default" ng-repeat="tag in request.tags">{{tag}}</span>
+            </div>
             <h3 ng-show='request.request_description'>Q: {{request.request_description}}</h3>
             File:{{request.changelog[1].title}}
             <div ng-hide='request.request_description' class="request-buttons">
@@ -69,7 +74,9 @@
          <div style="margin-left: 10px; margin-right: 10px; ">
             <div class="annotation_bubble_upper">
                <h3 style="font-size: 18px;">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
-
+               <div>
+                 <span class="label label-default" ng-repeat="tag in selectedObj.tags">{{tag}}</span>
+               </div>
                <h3 ng-show='selectedObj.request_description'>Q: {{selectedObj.request_description}}</h3>
                File:{{selectedObj.changelog[1].title}}
 
