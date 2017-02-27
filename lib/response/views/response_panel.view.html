@@ -59,7 +59,7 @@
             <br>
             <!-- <button class="btn btn-primary" ng-show='request.removeButton' ng-click="hideRequest(request, $index); $event.stopPropagation();">Remove</button> -->
             <div ng-show='request.helperCurrentWorking'>
-               <p style='color:#F90101; font-size: 20px; display:inline-block'>Helper is working</p>
+               <p style='color:#F90101; font-size: 20px; display:inline-block'>Helper: {{request.currentHelperName}} is working</p>
             </div>
             <div ng-show='request.helperIsDone'>
                <p style='color:#0E65FF; font-size: 20px; display:inline-block'>Helper sent a response</p>
@@ -112,9 +112,10 @@
                      <!-- display each answer in the response -->
                      <div ng-repeat='answer in helper_response.answers track by $index'>
                         <!-- Show explanation content -->
-                        <div ng-show='answer.type==="explanation"' class='response-content'>
-                           {{answer.value}}
+                        <div class='response-content' ng-show='answer.type==="explanation"'>
+                           <div class='explanation_editor' id='explanation_editor'>{{answer.value}}</div>
                         </div>
+
                      </div>
                      <div style='margin: 5px' ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
                         <div style="text-align:right; font-size:11px">
