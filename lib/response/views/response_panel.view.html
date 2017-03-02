@@ -73,11 +73,11 @@
       <div style="background-color: #fafafa;" ng-show="selectedObj && responseContent" ng-controller='RequestController' class="request-content">
          <div style="margin-left: 10px; margin-right: 10px; ">
             <div class="annotation_bubble_upper">
-               <h3 style="font-size: 18px;">{{selectedObj.title | limitTo:35}}{{selectedObj.title.length > 30 ? '...' : ''}} </h3>
+               <h3 class='selectable' style="font-size: 18px;-webkit-user-select: all; ">{{selectedObj.title }}</h3>
                <div>
                  <span class="label label-default" ng-repeat="tag in selectedObj.tags">{{tag}}</span>
                </div>
-               <h3 ng-show='selectedObj.request_description'>Q: {{selectedObj.request_description}}</h3>
+               <h3 style="line-height: 18px;" ng-show='selectedObj.request_description'>Q: {{selectedObj.request_description}}</h3>
                File:{{selectedObj.changelog[1].title}}
 
                <div ng-hide='selectedObj.request_description' class="request-buttons">

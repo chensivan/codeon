@@ -32,6 +32,16 @@ div.explanation_editor{
   width: 400px;
 }
 
+.selectable {
+  z-index: 100;
+  -webkit-touch-callout: all; /* iOS Safari */
+    -webkit-user-select: all; /* Safari */
+     -khtml-user-select: all; /* Konqueror HTML */
+       -moz-user-select: all; /* Firefox */
+        -ms-user-select: all; /* Internet Explorer/Edge */
+            user-select: all; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
 
 #editor-container {
   height: 200px;
@@ -69,13 +79,18 @@ div.explanation_editor{
     padding-left: 10px;
 
     .codeon_panel {
-        //display: inline-block;
-		overflow: auto;
-		min-width: 325px;
-		// Set this to set global width:
-		width: 400px;
+      //display: inline-block;
+  		overflow: auto;
+  		min-width: 325px;
+  		// Set this to set global width:
+  		width: 400px;
+      -webkit-user-select: all;  /* Chrome all / Safari all */
+      -moz-user-select: all;     /* Firefox all */
+      -ms-user-select: all;      /* IE 10+ */
+      user-select: all;          /* Likely future */
 
-    font-family: @font-family;
+
+      font-family: @font-family;
 
       p {
         margin-top: 0;
@@ -160,6 +175,10 @@ div.explanation_editor{
 				max-width: 386px;
 				margin: 10px;
 				overflow: scroll;
+        -webkit-user-select: all;  /* Chrome 49+ */
+        -moz-user-select: all;     /* Firefox 43+ */
+        -ms-user-select: all;      /* No support yet */
+        user-select: all;          /* Likely future */
 
 			}
 			.content-wrapper{
@@ -413,7 +432,7 @@ div.explanation_editor{
 line-height: 150%;
 width: 100%;
 color: black;
-height:91px;
+height:177px;
 background: #FAFAFA;
 z-index: 10;
 margin-top:5px;
