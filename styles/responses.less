@@ -23,6 +23,32 @@
 @resizer-width: 30px;
 
 
+.tooltip_icon {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip_icon .tooltiptext {
+    top: -5px;
+    left: 105%;
+    visibility: hidden;
+    width: 278px;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 10px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 9999;
+}
+
+.tooltip_icon:hover .tooltiptext {
+    visibility: visible;
+}
+
 ng-quill-editor.ng-invalid .ql-container {
     border: 1px dashed red;
 }
@@ -522,6 +548,10 @@ z-index: 10;
 
 input{
   width: 100%;
+}
+
+.radio input{
+
 }
 /* hover state */
 .chat-box > input[type="checkbox"]:hover + label {background-color:#404D5A}
