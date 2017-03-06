@@ -4,7 +4,10 @@
       <span class="title-text">{{selectedObj.request || title}} </span>
    </h1>
    <div id='blockList' class="content-wrapper" >
-      <button class = "btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
+     <script type="text/javascript">
+     disposable = atom.tooltips.add('.first-tip', {title: 'This is a tooltip'});
+     </script>
+      <button class = "btn btn-success first-tip" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
          <h2>Ask for help</h2>
       </button>
       <div ng-show="resList" class="request-list">
