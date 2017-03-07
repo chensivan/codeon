@@ -15,18 +15,13 @@ prerequisites to install the plugin. Below there is a guide that
 will take you through the requirements for Codeon the installation
 process.
 
-### Atom v1.6.2
+### Atom
 
-The Codeon plugin requires that you run the version 1.6.2 of Atom, so we
-will have to install this specific version. Don’t worry if you use Atom
-as your editor of choice and you would prefer to have the latest version
-installed, you can have both versions simultaneously.
+The Codeon plugin requires that you run the latest version of Atom. You can
+download it from the following link:
 
-#### Download
+-   [Atom](https://atom.io/)
 
-Get Atom v1.6.2 for your platform from the following link:
-
--   [Atom v1.6.2](https://github.com/atom/atom/releases/tag/v1.6.2)
 
 #### Installation
 
@@ -37,8 +32,8 @@ Get Atom v1.6.2 for your platform from the following link:
     the left of the Finder.
 
 ***Note:*** *If you already have a version of Atom in your system that
-you wish to keep rename the application launcher to something else (like
-Atom-1.6.2) so you don’t overwrite the existing app.*
+you wish to keep rename the application launcher to something else so you
+don’t overwrite the existing app.*
 
 ##### For Windows
 
@@ -154,7 +149,7 @@ If this doesn't work, try to make the link by giving the full path to
 each directory, for example:
 
     $ ln -s C:/Users/path/to/repo C:/Users/User/.atom/packages
-    
+
 Changing the paths as needed.
 
 Alternatively, you can make a symbolic link to the standard installation
