@@ -39,7 +39,7 @@
             <div>
               <span class="label label-default" ng-repeat="tag in request.tags">{{tag}}</span>
             </div>
-            <h3 ng-show='request.request_description'>Q: {{request.request_description}}</h3>
+            <h3 ng-show='request.request_description'><b>Q:</b> {{request.request_description}}</h3>
             File:{{request.changelog[1].title}}
             <div ng-hide='request.request_description' class="request-buttons">
               <br/>
@@ -52,7 +52,7 @@
                  </span>
                </button>
             </div>
-            <div style='float: right;margin-top:-28px;'>
+            <div style='float: right;margin-top:-13px;'>
                <span class='state'>{{request.notification}}</span></br>
                asked <span am-time-ago="request.updated" />
             </div>
@@ -77,7 +77,7 @@
                <div>
                  <span class="label label-default" ng-repeat="tag in selectedObj.tags">{{tag}}</span>
                </div>
-               <h3 style="line-height: 18px;" ng-show='selectedObj.request_description'>Q: {{selectedObj.request_description}}</h3>
+               <h3 style="line-height: 18px;" ng-show='selectedObj.request_description'><b>Q:</b> {{selectedObj.request_description}}</h3>
                File:{{selectedObj.changelog[1].title}}
 
                <div ng-hide='selectedObj.request_description' class="request-buttons">
@@ -199,7 +199,7 @@
             <div class="chat-box-content">
                <div class='row' ng-repeat='iterationRequest in selectedObj.status.discussion'>
                   <div class='col-sm-12'>
-                     {{iterationRequest.sender}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
+                     {{iterationRequest.sender=="Requester"? "You": "Teacher"}} : {{iterationRequest.value}} <small>(<span am-time-ago="iterationRequest.timestamp"></span>)</small>
                      <!-- <button style="color: gray" ng-click='showContext(iterationRequest.value)'>+</button> -->
                   </div>
                </div>
@@ -207,7 +207,7 @@
             <!-- <button style="color: gray" ng-click='captureContext()'>+</button> -->
             <div class = "chat-box-input native-key-bindings">
                <form ng-submit="inputSubmit()" >
-                  <input type="text" ng-keyup="$event.which ===13 && iterate($parent.iterationMsg)"  ng-model="$parent.iterationMsg" ui-keypress="{13:'iterate($parent.iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your helper!" />
+                  <input type="text" ng-keyup="$event.which ===13 && iterate($parent.iterationMsg)"  ng-model="$parent.iterationMsg" ui-keypress="{13:'iterate($parent.iterationMsg)'}" rows="1" tabIndex = -1 placeholder = "Discuss with your teacher!" />
                </form>
             </div>
          </div>
