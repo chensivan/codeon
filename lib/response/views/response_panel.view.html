@@ -50,7 +50,7 @@
             </div>
             <h3 ng-show='request.request_description'><b>Q:</b> {{request.request_description}}</h3>
             File:{{request.changelog[1].title}}
-            <div ng-hide='request.request_description' class="request-buttons">
+            <!-- <div ng-hide='request.request_description' class="request-buttons">
               <br/>
                <button ng-click="playRequest(request); $event.stopPropagation();" class="btn btn-default">
                  <span ng-if="!request.playing">
@@ -60,7 +60,7 @@
                  <span class="icon icon-primitive-square"></span>
                  </span>
                </button>
-            </div>
+            </div> -->
             <div style='float: right;margin-top:-13px;'>
                <span class='state'>{{request.notification}}</span></br>
                asked <span am-time-ago="request.updated" />
