@@ -5,12 +5,21 @@
       <span class="title-text">{{selectedObj.request || title}} </span>
    </h1>
    <div id='blockList' class="content-wrapper">
-      <button class="btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
-         <h2>Ask for help</h2>
-      </button>
-      <button class="btn" ng-show="reqSideBarButton" id="makeRequest" ng-click="search.toggle()">
-        <h2>Search</h2>
-      </button>
+     <span class="tooltipCover">
+       <button class="btn btn-success" ng-show="reqSideBarButton" id="makeRequest" ng-click="newRequest()">
+          <h2>Ask for help</h2>
+       </button>
+        <p class='tooltiptext_top' style='white-space:pre-line'>
+          If you need help on a specific part of your code, you can highlight them to notify the helper.
+        </p>
+     </span>
+     <span class="tooltipCover">
+       <button class="btn" ng-show="reqSideBarButton" id="makeRequest" ng-click="search.toggle()">
+         <h2>Search</h2>
+       </button>
+        <p class='tooltiptext_top' style='white-space:pre-line'>Search your prior requests' title.
+        </p>
+     </span>
       <div class="row" ng-show="search.active">
         <div class="col-sm-11">
           <hr>
