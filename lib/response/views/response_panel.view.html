@@ -109,7 +109,12 @@
                          Code difference between yours and helpers is on the right column. Addition in green and deletion in red. (You may close helper code w/o saving it)
                        </p>
                      </div>
-                     <button style='margin-top: 15px; float: right;' class="btn btn-success" ng-click='acceptAnswer(selectedObj)'>Accept</button>
+
+                       <div  style='margin-top: 15px; float: right;' class="tooltipCover">
+                         <button class="btn btn-success tooltipCover" ng-click='acceptAnswer(selectedObj)'>Accept</button>
+                         <p class='tooltiptext_left' style='white-space:pre-line'>Accept will change the request status to 'Resolved' and notify educators that this request is resolved.
+                         </p>
+                       </div>
 
                      <!-- <img class='answerInfo' ng-show='codeCommentLegend' src="atom://atom-codeon/resources/info.png" style="width: 20px;" title="Teacher's code is on the right column with comments in yellow. (You may close helper code w/o saving it)">
                      <img class='answerInfo' ng-show='codeDiffLegend' src="atom://atom-codeon/resources/info.png" style="width: 20px;" title="Code difference between yours and helpers is on the right column. Addition in green and deletion in red. (You may close helper code w/o saving it)"> -->
@@ -132,17 +137,30 @@
                            </div>
                            <span am-time-ago="helper_response.timestamp"></span>
                         </div>
-                        <div ng-show="codeDiffLegend" ng-repeat='answer in helper_response.answers track by $index'>
+                        <div class="tooltipCover" ng-show="codeDiffLegend" ng-repeat='answer in helper_response.answers track by $index'>
                            <button ng-show="answer.type=='annotation'" ng-click="gotoAnnotation(answer)">Annotation: {{answer.value}}</button>
+                           <p class='tooltiptext_top' style='white-space:pre-line'>Click to see the annotated code.
+                           </p>
                         </div>
-                        <form ng-hide='noInlineCode' style="margin-top:25px;">
+                        <!-- ng-hide='noInlineCode' -->
+                        <form style="margin-top:25px;">
                            <div class="btn-group" data-toggle="buttons">
 
                               <!-- <label class="btn btn-default">
                               <input ng-model="values" ng-click="openNewTabShowCodeDiff(helper_response.answers)" value="helper" type="radio">{{button_value}}
                               </label> -->
-                              <button ng-click='openNewTabShowHelperCode(helper_response.answers)'>Helper Code</button>
-                              <button ng-click='openNewTabShowCodeDiff(helper_response.answers)'>Code Diff</button>
+                              <span class="tooltipCover">
+                                <button ng-click='openNewTabShowHelperCode(helper_response.answers)'>Helper Code</button>
+                                <p class='tooltiptext_top' style='white-space:pre-line'>Click to see Helper's code.
+                                </p>
+                              </span>
+
+                              <span class="tooltipCover">
+                                <button ng-click='openNewTabShowCodeDiff(helper_response.answers)'>Code Diff</button>
+                                <p class='tooltiptext_top' style='white-space:pre-line'>Click to see the changes made by helper.
+                                </p>
+                              </span>
+
 
                               <!-- <div layout="row" layout-sm="column" layout-align="space-between" layout-align-sm="space-around center">
                                 <input style='width: 200px; display: none;' type="radio" ng-model="button_value" value="Helper Code" name="user_type1" ng-click='openNewTabShowCodeDiff(helper_response.answers, button_value)'>Helper Code
