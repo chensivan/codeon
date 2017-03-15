@@ -141,9 +141,9 @@
                      <!-- display each answer in the response -->
                      <div style='margin: 5px' ng-repeat='answer in helper_response.answers | showButtonOnce track by $index '>
                         <div style="text-align:right; font-size:11px">
-                           <div style='float: left; color:red' ng-hide="codeDiffLegend">
+                           <!-- <div style='float: left; color:red' ng-hide="codeDiffLegend">
                               (Please only run Helper Code version.)
-                           </div>
+                           </div> -->
                            <span am-time-ago="helper_response.timestamp"></span>
                         </div>
                         <div class="tooltipCover" ng-show="codeDiffLegend" ng-repeat='answer in helper_response.answers track by $index'>
